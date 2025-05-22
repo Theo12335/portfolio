@@ -51,12 +51,10 @@ export default function RootLayout({
           ${playfair.variable} 
           ${geistMono.variable} 
           font-sans
-          bg-gradient-to-br 
-          from-[#0A162E] from-[10%]
-          via-[#023A69] via-[37%]
-          via-[#02528D] via-[67%]
-          via-[#0F2240] via-[84%]
-          to-[#014A81] via-[100%]
+          bg-gradient-to-tl 
+          from-[#0F2240] from-[0%]
+          via-[#023A69] via-[50%]
+          to-[#0A162E] to-[100%]
           bg-fixed
         `}
       >

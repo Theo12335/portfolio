@@ -1,13 +1,11 @@
 // app/page.tsx
 'use client';
 
-import Image from "next/image";
 import Header from "@/app/components/header";
 import Link from 'next/link';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import DynamicID from "@/app/components/id";
 import React, { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
 import useTypewriter from '@/app/hooks/useTypewriter';
 import FloatingAstronaut from '@/app/components/astronaut'; // Import the new component
 import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
@@ -16,18 +14,10 @@ import { BsTwitterX } from 'react-icons/bs'; // Using BsTwitterX for X.com icon
 export default function Home() {
   const wordsToAnimate = ["Front-End Developer", "UI/UX Designer"];
   const animatedText = useTypewriter(wordsToAnimate, 100, 50, 1500, 700, true);
-  const introGreeting = ["Hello, I'm a Junior"];
+  const introGreeting = React.useMemo(() => ["Hello, I'm a Junior"], []);
   const animatedIntroText = useTypewriter(introGreeting, 100, 50, 0, 0, false);
   const [showArrow, setShowArrow] = useState(false);
-  const ChevronDown = dynamic(() => import('@heroicons/react/24/solid').then(mod => mod.ChevronDownIcon), {
-    ssr: false,
-    loading: () => <div className="h-10 w-10" /> // Fallback
-  });
-  const [iconLoaded, setIconLoaded] = useState(false);
-
-  useEffect(() => {
-    setIconLoaded(true);
-  }, []);
+  
 
   useEffect(() => {
     if (animatedIntroText === introGreeting[0]) {
@@ -105,7 +95,7 @@ export default function Home() {
                 </h2>
               </div>
               <p className="mt-4 text-lg max-w-prose text-left w-full leading-relaxed tracking-wider">
-                Frontend Developer eager to grow into full-stack roles, with a solid foundation in C# and .NET. I enjoy bringing dynamic, modern designs to life and thrive on learning new technologies to tackle challenges. Proficient in React.js, Next.js, JavaScript/TypeScript, HTML, CSS/Tailwind, Node.js, and Firebase, I'm passionate about building engaging user experiences. Always excited to collaborate and create innovative solutions.
+                Frontend Developer eager to grow into full-stack roles, with a solid foundation in C# and .NET. I enjoy bringing dynamic, modern designs to life and thrive on learning new technologies to tackle challenges. Proficient in React.js, Next.js, JavaScript/TypeScript, HTML, CSS/Tailwind, Node.js, and Firebase, I&apos;m passionate about building engaging user experiences. Always excited to collaborate and create innovative solutions.
               </p>
             </div>
             <div className="flex flex-col items-center py-[10%] w-full overflow-hidden h-screen"> {/* Added overflow-hidden for safety */}
