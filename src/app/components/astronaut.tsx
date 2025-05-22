@@ -1,30 +1,22 @@
-// app/components/FloatingAstronaut.tsx (or app/components/astronaut.tsx)
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Image from "next/image";
+import Image, { ImageProps } from 'next/image';
 
-interface FloatingAstronautProps {
-    src: string;
-    alt: string;
-    width: number;
-    height: number;
+interface FloatingAstronautProps extends Omit<ImageProps, 'className' | 'style'> {
     floatRange?: number;
     floatDuration?: number;
     transitionDuration?: number;
 }
 
-// MODIFICATION HERE:
-// Instead of `const FloatingAstronaut: React.FC<FloatingAstronautProps> = ({ ... }) => {`,
-// use `const FloatingAstronaut = ({ src, alt, width, height, floatRange = 20, floatDuration = 5000, transitionDuration = 5000 }: FloatingAstronautProps) => {`
 const FloatingAstronaut = ({
-    src,
-    alt,
-    width,
-    height,
     floatRange = 20,
     floatDuration = 5000,
     transitionDuration = 5000,
+    width,
+    height,
+    onLoad,
+    ...imageProps
 }: FloatingAstronautProps) => {
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -38,22 +30,33 @@ const FloatingAstronaut = ({
         return () => clearInterval(moveInterval);
     }, [floatRange, floatDuration]);
 
+    const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+        console.log('Astronaut image loaded');
+        if (onLoad) {
+            onLoad(e);
+        }
+    };
+
     return (
         <div
-            className={`
-        relative
-        transition-transform ease-in-out
-      `}
+            className="relative transition-transform ease-in-out"
             style={{
                 transform: `translate(${position.x}px, ${position.y}px)`,
                 transitionDuration: `${transitionDuration}ms`,
+                width: `${width}px`,
+                height: `${height}px`,
             }}
         >
             <Image
-                src={src}
-                alt={alt}
+                {...imageProps}
                 width={width}
                 height={height}
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain'
+                }}
+                onLoad={handleImageLoad}
             />
         </div>
     );

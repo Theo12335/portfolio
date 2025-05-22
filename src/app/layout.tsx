@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Playfair_Display, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import InteractiveStarryBg from "@/app/components/stars"; // Adjust path if your component is elsewhere
+import Head from 'next/head';
+
 
 // Configure Playfair Display
 const playfair = Playfair_Display({
@@ -28,6 +30,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <link
+          rel="preload"
+          href="https://unpkg.com/@heroicons/react@24/solid"
+          as="script"
+          crossOrigin="anonymous"
+        />
+        <Head>
+          <link
+            rel="preload"
+            href="/astronaut.svg"
+            as="image"
+            type="image/svg+xml"
+          />
+        </Head>
+      </Head>
       <body
         className={`
           ${playfair.variable} 
@@ -35,7 +53,7 @@ export default function RootLayout({
           font-sans
           bg-gradient-to-br 
           from-[#0A162E] from-[10%]
-          via-[#023A69] via-[36%]
+          via-[#023A69] via-[37%]
           via-[#02528D] via-[67%]
           via-[#0F2240] via-[84%]
           to-[#014A81] via-[100%]
@@ -51,6 +69,6 @@ export default function RootLayout({
           {children}
         </main>
       </body>
-    </html>
+    </html >
   );
 }

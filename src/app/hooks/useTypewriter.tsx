@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 const useTypewriter = (
     words: string[],
     typingSpeed = 150,
-    deletingSpeed = 75,
-    pauseBeforeDelete = 5000,
-    pauseBeforeType = 1000,
+    deletingSpeed = 50,
+    pauseBeforeDelete = 1500,
+    pauseBeforeType = 700,
     loop = true
 ) => {
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
