@@ -1,6 +1,7 @@
 // app/components/header.tsx
 import Link from 'next/link';
 import React from 'react';
+import Image from 'next/image';
 
 const Header: React.FC = () => (
     <header className="fixed top-0 left-0 right-0 z-10 w-full py-4 flex justify-center pointer-events-auto">
@@ -10,14 +11,17 @@ const Header: React.FC = () => (
         >
             <div className="flex flex-row items-center justify-center w-[30%] ml-[2%]">
                 <Link href="/">
-                    <img
-                        className="w-[25%] h-[25%]" // Consider fixed width/height for images for better control
+                    <Image
+                        className="w-[25%] h-[25%]"
                         src="/logo.svg"
                         alt="Logo"
+                        width={80}
+                        height={80}
+                        priority
                     />
                 </Link>
             </div>
-            <div className="flex flex-row items-center justify-end px-[7%] w-[65%] text-white w-[70%]">
+            <div className="flex flex-row items-center justify-end px-[7%] text-white w-[70%]">
                 <a
                     href="#about-me"
                     onClick={(e) => {
@@ -51,7 +55,7 @@ const Header: React.FC = () => (
                 </Link>
                 <div className="flex items-center justify-center ml-4">
                     <Link href="#contact" className="bg-[#00a6c0] text-white px-4 py-2 rounded-2xl hover:scale-105 hover:bg-[#557793] hover:text-white transition-all duration-150 font-bold"> {/* Fixed text-[#FFFFF] to text-white */}
-                        Let's Connect!
+                        Let&apos;s Connect!
                     </Link>
                 </div>
             </div>

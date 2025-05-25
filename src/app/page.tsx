@@ -10,22 +10,18 @@ import useTypewriter from '@/app/hooks/useTypewriter';
 import FloatingAstronaut from '@/app/components/astronaut';
 import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
 import { BsTwitterX } from 'react-icons/bs';
-import CategorizedIconsDisplay from '@/app/components/categories'; // Import the Categories component
+import CategorizedIconsDisplay from '@/app/components/categories';
 
 export default function Home() {
   const wordsToAnimate = ["Front-End Developer", "UI/UX Designer"];
   const introGreeting = React.useMemo(() => ["Hello, I'm a Junior"], []);
 
-  // State to control when the second animation starts
   const [startAnimatedText, setStartAnimatedText] = useState(false);
 
-  // animatedIntroText will run first
   const animatedIntroText = useTypewriter(introGreeting, 100, 50, 0, 0, false, () => {
-    // Callback function: once animatedIntroText is done, start the second animation
     setStartAnimatedText(true);
   });
 
-  // animatedText will only run if startAnimatedText is true
   const animatedText = useTypewriter(startAnimatedText ? wordsToAnimate : [], 100, 50, 1500, 700, true);
   const [showArrow, setShowArrow] = useState(false);
 
@@ -39,14 +35,12 @@ export default function Home() {
   }, [animatedIntroText, introGreeting]);
 
   return (
-    <div className="relative flex flex-col">
-
+    <div className="relative flex flex-col min-h-screen overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-auto">
         <DynamicID />
       </div>
-
-      <div className="relative z-0 flex flex-col px-[10%]">
-        <Header />
+      <div className="relative z-10 flex flex-col px-[10%] min-h-screen pointer-events-none">
+        <Header /> 
 
         <div className="flex flex-col text-center min-h-screen">
           <div className="flex mt-[20%] text-center justify-center">
@@ -56,7 +50,6 @@ export default function Home() {
           </div>
           <div className="mt-2 text-center">
             <h1 className="text-5xl font-bold">
-              {/* Only render animatedText if startAnimatedText is true */}
               {startAnimatedText && (
                 <>
                   <span className="font-semibold text-[#00a6c0]">{animatedText}</span>
@@ -66,7 +59,8 @@ export default function Home() {
             </h1>
           </div>
           {showArrow && (
-            <div className="mt-[30%] mb-20 h-10 pointer-events-auto flex items-center justify-center">
+            <div className="mt-[30%] mb-20 h-10 flex items-center justify-center">
+              {/* This link: explicitly make it interactive */}
               <a
                 href="#about-me"
                 onClick={(e) => {
@@ -76,7 +70,7 @@ export default function Home() {
                     aboutMeSection.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
-                className="cursor-pointer"
+                className="cursor-pointer pointer-events-auto" // CRITICAL: Re-enable interaction
                 aria-label="Scroll to About Me section"
               >
                 <ChevronDownIcon className="h-10 w-10 text-white animate-bounce" />
@@ -107,11 +101,12 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex mt-[5%]">
+                {/* Resume button: explicitly make it interactive */}
                 <a
                   href="https://drive.google.com/file/d/1KWxMBOpTVBL529X3Ti4BpDPEf-0Ylm1B/view?usp=sharing"
                   target="Resume"
                   rel="noopener noreferrer"
-                  className="bg-[#00a6c0] text-white px-4 py-2 rounded-2xl hover:scale-105 hover:bg-[#557793] hover:text-white transition-all duration-150 font-bold">
+                  className="bg-[#00a6c0] text-white px-4 py-2 rounded-2xl hover:scale-105 hover:bg-[#557793] hover:text-white transition-all duration-150 font-bold pointer-events-auto"> {/* CRITICAL: Re-enable interaction */}
                   <h1 className="text-2xl font-bold">
                     Resume
                   </h1>
@@ -132,20 +127,21 @@ export default function Home() {
                   priority
                 />
               </div>
-              <div className="flex flex-row items-right justify-bottom gap-6 pointer-events-auto">
-                <Link href="https://github.com/your-github-profile" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              {/* Social media links: explicitly make them interactive */}
+              <div className="flex flex-row items-right justify-bottom gap-6">
+                <Link href="https://github.com/your-github-profile" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="pointer-events-auto"> {/* CRITICAL: Re-enable interaction */}
                   <FaGithub className="text-4xl text-gray-400 hover:text-white transition-colors duration-200" />
                 </Link>
-                <Link href="https://linkedin.com/in/your-linkedin-profile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <Link href="https://linkedin.com/in/your-linkedin-profile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="pointer-events-auto"> {/* CRITICAL: Re-enable interaction */}
                   <FaLinkedin className="text-4xl text-gray-400 hover:text-white transition-colors duration-200" />
                 </Link>
-                <Link href="https://facebook.com/your-facebook-profile" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <Link href="https://facebook.com/your-facebook-profile" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="pointer-events-auto"> {/* CRITICAL: Re-enable interaction */}
                   <FaFacebook className="text-4xl text-gray-400 hover:text-white transition-colors duration-200" />
                 </Link>
-                <Link href="https://instagram.com/your-instagram-profile" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <Link href="https://instagram.com/your-instagram-profile" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="pointer-events-auto"> {/* CRITICAL: Re-enable interaction */}
                   <FaInstagram className="text-4xl text-gray-400 hover:text-white transition-colors duration-200" />
                 </Link>
-                <Link href="https://x.com/your-x-profile" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)">
+                <Link href="https://x.com/your-x-profile" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)" className="pointer-events-auto"> {/* CRITICAL: Re-enable interaction */}
                   <BsTwitterX className="text-4xl text-gray-400 hover:text-white transition-colors duration-200" />
                 </Link>
               </div>
@@ -155,7 +151,8 @@ export default function Home() {
           </div>
         </div>
         <div className="min-h-screen mb-2" id="skills">
-          <div className="flex flex-col pointer-events-auto justify-top mt-[6%] min-h-[95%] px-[5%]">
+          <div className="flex flex-col justify-top mt-[6%] min-h-[95%] px-[5%] pointer-events-auto">
+            {/* CategorizedIconsDisplay: If it has internal interactive elements, you might need to ensure they have pointer-events-auto within that component's JSX */}
             <CategorizedIconsDisplay />
           </div>
         </div>
