@@ -1,4 +1,5 @@
 // app/components/header.tsx
+'use client';
 import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
@@ -40,20 +41,31 @@ const Header: React.FC = () => (
                     href="#skils"
                     onClick={(e) => {
                         e.preventDefault();
-                        const aboutMeSection = document.getElementById('skills');
-                        if (aboutMeSection) {
-                            aboutMeSection.scrollIntoView({ behavior: 'smooth' });
+                        const skillsSection = document.getElementById('skills');
+                        if (skillsSection) {
+                            skillsSection.scrollIntoView({ behavior: 'smooth' });
                         }
                     }}
                     className="mr-4 hover:scale-110 hover:text-white transition-all duration-300"
-                    aria-label="Scroll to About Me section"
+                    aria-label="Scroll to Tech Stack section"
                 >
                     Tech Stack
                 </a>
-                <Link href="#portfolio" className="mr-4 hover:scale-110 hover:text-white transition-all duration-300"> {/* Added mr-4 for consistency */}
-                    Portfolio
-                </Link>
-                <div className="flex items-center justify-center ml-4">
+                <a
+                    href="#projects"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        const projectsSection = document.getElementById('projects');
+                        if (projectsSection) {
+                            projectsSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }}
+                    className="mr-4 hover:scale-110 hover:text-white transition-all duration-300"
+                    aria-label="Scroll to Projects section"
+                >
+                    Projects
+                </a>
+                <div className="flex items-center justify-center">
                     <Link href="#contact" className="bg-[#00a6c0] text-white px-4 py-2 rounded-2xl hover:scale-105 hover:bg-[#557793] hover:text-white transition-all duration-150 font-bold"> {/* Fixed text-[#FFFFF] to text-white */}
                         Let&apos;s Connect!
                     </Link>

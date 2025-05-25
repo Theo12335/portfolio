@@ -51,6 +51,7 @@ const FloatingAstronaut = ({
                 {...imageProps}
                 width={width}
                 height={height}
+                alt={imageProps.alt ?? ''}
                 style={{
                     width: '100%',
                     height: '100%',

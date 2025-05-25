@@ -1,9 +1,6 @@
-/* src/app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Any other global styles (be cautious as they can conflict) */
 
 :root {
   --background: #ffffff;
@@ -17,44 +14,31 @@
   }
 }
 
-/* --- IMPORTANT CHANGES FOR FULL SCREEN AND OVERFLOW --- */
 html,
 body {
-  height: 100%; /* Make html and body take full viewport height */
-  width: 100%; /* Make html and body take full viewport width */
-  margin: 0; /* Remove default margins */
-  padding: 0; /* Remove default paddings */
-  /* CHANGE HERE: Allow vertical scrolling, hide horizontal */
-  overflow-y: auto; /* Allow vertical scrolling when content overflows */
-  overflow-x: hidden; /* Prevent horizontal scrolling, which is usually undesired */
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll by default */
 }
-/* -------------------------------------------------------- */
-
 
 body {
   color: var(--foreground);
   background: var(--background);
-  /* font-family: Arial, Helvetica, sans-serif; */ /* <<< Keep this line commented out or remove it.
-                                                   Tailwind usually handles fonts, or you
-                                                   might have a specific font setup. */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative; /* Establish a stacking context for fixed/absolute children */
 }
 
-/* Ensure the root element of your Next.js app also fills the space */
-/* For Next.js, this is usually #__next. For Create React App, it's #root. */
 #__next {
   height: 100%;
   width: 100%;
-  /* CHANGE HERE: Allow vertical scrolling, hide horizontal */
-  overflow-y: auto; /* Allow vertical scrolling for the app root */
   overflow-x: hidden; /* Hide horizontal overflow for the app root */
 }
 
-
 * {
   box-sizing: border-box;
-  /* Reset padding and margin for all elements */
   padding: 0;
   margin: 0;
 }

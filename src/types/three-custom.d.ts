@@ -1,6 +1,7 @@
 // src/types/three-custom.d.ts
+'use client';
+
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
-import { extend } from '@react-three/fiber';
 
 declare module '@react-three/fiber' {
     interface ThreeElements {

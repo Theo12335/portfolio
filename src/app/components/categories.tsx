@@ -23,7 +23,7 @@ const CategorizedIconsDisplay: React.FC = () => {
       <div className="flex flex-row items-center justify-center mb-8 border-b border-gray-700 pb-2 w-full px-[4%] mt-[-10]">
         <div className="flex justify-start items-left w-[50%] py-2">
           <h2 className="flex lg:text-4xl md:text-3xl font-bold">
-            Tech <span className="text-[#C1E8FF]">Stack</span>
+            Tech <span className="text-[#C1E8FF] ml-2"> Stack</span>
           </h2>
         </div>
         <div className="flex justify-end items-right w-[50%] gap-1">
@@ -32,7 +32,7 @@ const CategorizedIconsDisplay: React.FC = () => {
               key={category.id}
               onClick={() => setActiveCategory(category.id as CategoryId)}
               className={`
-              text-base py-1 px-2 rounded-3xl text-sm font-semibold
+              text-base py-1 px-2 rounded-3xl font-semibold
               transition-all duration-300 ease-in-out
               ${activeCategory === category.id
                   ? 'bg-[#00a6c0] text-white shadow-lg transform scale-105' // Active style

@@ -14,7 +14,7 @@ const InteractiveStarryBg = () => {
         if (!ctx) return;
 
         let stars: Array<{ x: number; y: number; radius: number }> = [];
-        let mouse = { x: 0, y: 0 };
+        const mouse = { x: 0, y: 0 };
         const connectionRadius = 150; // Max distance for lines
         const mouseProximityRadius = 100; // How close mouse needs to be to "activate" stars for line drawing
 
