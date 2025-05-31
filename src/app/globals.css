@@ -7,12 +7,6 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 html,
 body {
@@ -47,9 +41,12 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
+:root {
+  --foreground: #ffffff;  /* white text everywhere */
+}
 @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+  :root {
+    /* Remove or comment out this so it doesn't override */
+    /* --foreground: #ededed; */
   }
 }

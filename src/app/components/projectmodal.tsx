@@ -163,109 +163,109 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                    flex flex-col max-h-[90vh] overflow-y-auto"> {/* Added modal-content-container for outside click detection */}
         {/* Modal content inner padding, previously was on the main div */}
         <div className="p-4 sm:p-8"> {/* Internal padding for content */}
-            {/* Close Button */}
-            <span
-              className="absolute top-4 right-6 text-gray-400 text-4xl font-bold cursor-pointer transition-colors duration-200 hover:text-white z-10" // Added z-10
-              onClick={onClose}
-            >
-              &times;
-            </span>
+          {/* Close Button */}
+          <span
+            className="absolute top-4 right-6 text-gray-400 text-4xl font-bold cursor-pointer transition-colors duration-200 hover:text-white z-10" // Added z-10
+            onClick={onClose}
+          >
+            &times;
+          </span>
 
-            {/* Header Section: Logo, Title, Tech, Social Links */}
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-8">
-              {/* Large Logo */}
-              <div className="flex-shrink-0 w-32 h-32 md:w-40 md:h-40 relative">
-                <Image
-                  src={project.logo}
-                  alt={`${project.title} logo`}
-                  layout="fill"
-                  objectFit="contain"
-                  className="rounded-lg"
-                  priority
-                />
-              </div>
-
-              {/* Title, Tech, and External Links */}
-              <div className="flex flex-col text-center md:text-left flex-grow">
-                <div className="flex flex-col md:flex-row items-center md:items-baseline justify-center md:justify-start gap-4 mb-2">
-                  <h2 className="text-4xl md:text-5xl font-bold text-[#C1E8FF]">{project.title}</h2>
-                  {/* GitHub and Website Links */}
-                  <div className="flex gap-4">
-                    {project.githubUrl && (
-                      <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub Repository" className="text-gray-400 hover:text-white transition-colors duration-200">
-                        <FaGithub className="text-3xl" />
-                      </Link>
-                    )}
-                    {project.websiteUrl && (
-                      <Link href={project.websiteUrl} target="_blank" rel="noopener noreferrer" aria-label="Live Website" className="text-gray-400 hover:text-white transition-colors duration-200">
-                        <BsGlobe className="text-3xl" />
-                      </Link>
-                    )}
-                  </div>
-                </div>
-
-                {/* Tech Labels */}
-                <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-2">
-                  <span className="text-sm bg-[#00a6c0] text-white rounded-full px-3 py-1 font-medium">{project.tech1}</span>
-                  <span className="text-sm bg-[#00a6c0] text-white rounded-full px-3 py-1 font-medium">{project.tech2}</span>
-                  <span className="text-sm bg-[#00a6c0] text-white rounded-full px-3 py-1 font-medium">{project.tech3}</span>
-                  {/* Add more tech labels here as needed */}
-                </div>
-              </div>
+          {/* Header Section: Logo, Title, Tech, Social Links */}
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-8">
+            {/* Large Logo */}
+            <div className="flex-shrink-0 w-32 h-32 md:w-40 md:h-40 relative">
+              <Image
+                src={project.logo}
+                alt={`${project.title} logo`}
+                layout="fill"
+                objectFit="contain"
+                className="rounded-lg"
+                priority
+              />
             </div>
 
-            {/* Project Description (Original Full Description) */}
-
-            {/* My Contributions Paragraph */}
-            <h3 className="text-2xl font-bold text-[#00a6c0] mb-3 mt-6">My Contributions</h3>
-            <p className="text-lg text-gray-300 leading-relaxed mb-8">{project.contributions}</p>
-
-            {/* Project Gallery Carousel */}
-            {project.galleryImages.length > 0 && (
-              <>
-                <h3 className="text-2xl font-bold text-[#00a6c0] mb-3 mt-6">Project Gallery</h3>
-                <div className="relative w-full overflow-hidden rounded-lg border border-gray-700 mb-8">
-                  <div
-                    ref={galleryTrackRef}
-                    className="flex transition-transform duration-500 ease-in-out"
-                  >
-                    {project.galleryImages.map((imgSrc, index) => (
-                      <div key={index} className="min-w-full flex items-center justify-center bg-gray-900 p-4">
-                        <Image
-                          src={imgSrc}
-                          alt={`Gallery image ${index + 1} for ${project.title}`}
-                          width={800}
-                          height={500}
-                          objectFit="contain"
-                          className="w-full h-auto block max-h-[60vh]"
-                          priority={index === 0}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                  {gallerySlideCount > 1 && (
-                    <>
-                      <button
-                        className="absolute top-1/2 -translate-y-1/2 bg-black bg-opacity-60 text-white border-none p-3 cursor-pointer z-10 text-2xl rounded-full transition-colors duration-300 hover:bg-opacity-80 left-4"
-                        onClick={() => { stopGalleryAutoCycle(); goToGallerySlide(galleryCurrentIndex - 1); startGalleryAutoCycle(); }}
-                      >
-                        ❮
-                      </button>
-                      <button
-                        className="absolute top-1/2 -translate-y-1/2 bg-black bg-opacity-60 text-white border-none p-3 cursor-pointer z-10 text-2xl rounded-full transition-colors duration-300 hover:bg-opacity-80 right-4"
-                        onClick={() => { stopGalleryAutoCycle(); goToGallerySlide(galleryCurrentIndex + 1); startGalleryAutoCycle(); }}
-                      >
-                        ❯
-                      </button>
-                    </>
+            {/* Title, Tech, and External Links */}
+            <div className="flex flex-col text-center md:text-left flex-grow">
+              <div className="flex flex-col md:flex-row items-center md:items-baseline justify-center md:justify-start gap-4 mb-2">
+                <h2 className="text-4xl md:text-5xl font-bold text-white">{project.title}</h2>
+                {/* GitHub and Website Links */}
+                <div className="flex gap-4">
+                  {project.githubUrl && (
+                    <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub Repository" className="text-gray-400 hover:text-white transition-colors duration-200">
+                      <FaGithub className="text-3xl" />
+                    </Link>
+                  )}
+                  {project.websiteUrl && (
+                    <Link href={project.websiteUrl} target="_blank" rel="noopener noreferrer" aria-label="Live Website" className="text-gray-400 hover:text-white transition-colors duration-200">
+                      <BsGlobe className="text-3xl" />
+                    </Link>
                   )}
                 </div>
-              </>
-            )}
+              </div>
 
-            {/* Additional Project Information Paragraph */}
-            <h3 className="text-2xl font-bold text-[#00a6c0] mb-3 mt-6">More About the Project</h3>
-            <p className="text-lg text-gray-300 leading-relaxed mb-4">{project.projectInfo}</p>
+              {/* Tech Labels */}
+              <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-2">
+                <span className="text-sm bg-[#00a6c0] text-white rounded-full px-3 py-1 font-medium">{project.tech1}</span>
+                <span className="text-sm bg-[#00a6c0] text-white rounded-full px-3 py-1 font-medium">{project.tech2}</span>
+                <span className="text-sm bg-[#00a6c0] text-white rounded-full px-3 py-1 font-medium">{project.tech3}</span>
+                {/* Add more tech labels here as needed */}
+              </div>
+            </div>
+          </div>
+
+          {/* Project Description (Original Full Description) */}
+
+          {/* My Contributions Paragraph */}
+          <h3 className="text-2xl font-bold text-[#00a6c0] mb-3 mt-6">My Contributions</h3>
+          <p className="text-lg text-gray-300 leading-relaxed mb-8">{project.contributions}</p>
+
+          {/* Project Gallery Carousel */}
+          {project.galleryImages.length > 0 && (
+            <>
+              <h3 className="text-2xl font-bold text-[#00a6c0] mb-3 mt-6">Project Gallery</h3>
+              <div className="relative w-full overflow-hidden rounded-lg border border-gray-700 mb-8">
+                <div
+                  ref={galleryTrackRef}
+                  className="flex transition-transform duration-500 ease-in-out"
+                >
+                  {project.galleryImages.map((imgSrc, index) => (
+                    <div key={index} className="min-w-full flex items-center justify-center bg-gray-900 p-4">
+                      <Image
+                        src={imgSrc}
+                        alt={`Gallery image ${index + 1} for ${project.title}`}
+                        width={800}
+                        height={500}
+                        objectFit="contain"
+                        className="w-full h-auto block max-h-[60vh]"
+                        priority={index === 0}
+                      />
+                    </div>
+                  ))}
+                </div>
+                {gallerySlideCount > 1 && (
+                  <>
+                    <button
+                      className="absolute top-1/2 -translate-y-1/2 bg-black bg-opacity-60 text-white border-none p-3 cursor-pointer z-10 text-2xl rounded-full transition-colors duration-300 hover:bg-opacity-80 left-4"
+                      onClick={() => { stopGalleryAutoCycle(); goToGallerySlide(galleryCurrentIndex - 1); startGalleryAutoCycle(); }}
+                    >
+                      ❮
+                    </button>
+                    <button
+                      className="absolute top-1/2 -translate-y-1/2 bg-black bg-opacity-60 text-white border-none p-3 cursor-pointer z-10 text-2xl rounded-full transition-colors duration-300 hover:bg-opacity-80 right-4"
+                      onClick={() => { stopGalleryAutoCycle(); goToGallerySlide(galleryCurrentIndex + 1); startGalleryAutoCycle(); }}
+                    >
+                      ❯
+                    </button>
+                  </>
+                )}
+              </div>
+            </>
+          )}
+
+          {/* Additional Project Information Paragraph */}
+          <h3 className="text-2xl font-bold text-[#00a6c0] mb-3 mt-6">More About the Project</h3>
+          <p className="text-lg text-gray-300 leading-relaxed mb-4">{project.projectInfo}</p>
         </div>
       </div>
     </div>
