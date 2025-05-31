@@ -80,27 +80,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
     };
   }, [galleryCurrentIndex, gallerySlideCount, startGalleryAutoCycle, stopGalleryAutoCycle]);
 
-  // REMOVE THIS useEffect BLOCK:
-  // useEffect(() => {
-  //   const originalOverflow = document.body.style.overflow;
-  //   const originalPaddingRight = document.body.style.paddingRight;
-
-  //   // Calculate scrollbar width to prevent content reflow when scrollbar disappears
-  //   const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-
-  //   document.body.style.overflow = 'hidden';
-  //   if (scrollbarWidth > 0) {
-  //     document.body.style.paddingRight = `${scrollbarWidth}px`;
-  //   }
-
-  //   return () => {
-  //     document.body.style.overflow = originalOverflow;
-  //     document.body.style.paddingRight = originalPaddingRight;
-  //   };
-  // }, []);
-
-
-  // Dynamically inject CSS for modal animation
   useEffect(() => {
     if (typeof document === 'undefined') return; // Ensure it's client-side
 

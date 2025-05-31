@@ -23,7 +23,6 @@ interface Project {
   projectInfo: string;
 }
 
-// Define your project data (keeping your provided data)
 const projectsData: Project[] = [
   {
     id: 1,
@@ -36,8 +35,8 @@ const projectsData: Project[] = [
     tech3: 'TypeScript',
     description: 'BSDOC is a web-based application I helped develop as part of a group project for our Modern Systems Analysis and Design course, marking my first experience in web development as the lead front-end designer and developer. The app assists users in managing common health issues by allowing them to enter symptoms, receive over-the-counter medication suggestions, and access home care guidance. A core feature is its symptom checker, which analyzes user input to identify potential conditions and recommend appropriate treatments. I integrated Firebase to securely store user profiles and symptom history, enabling personalized recommendations based on previous entries.',
     logo: '/BSDOC.svg',
-    githubUrl: 'https://github.com/your-username/BSDOC-repo',
-    websiteUrl: 'https://bsdoc-example.com',
+    githubUrl: 'https://github.com/mantequilla45/bsdoc',
+    websiteUrl: 'https://bsdoc-project.vercel.app/',
     contributions: 'BSDOC started as my idea for a Windows Forms project, I focused on developing the front-end user interface, logo designing, ensuring a responsive and intuitive experience across various devices. My responsibilities included implementing the symptom checker logic, refining the medication suggestions, implementing symptom tracking for the admin dashboard, and making sure that the medical history for each user is reflected on unto the profile. I also led design discussions to refine the overall user flow and contributed significantly to the backend logic for data processing and secure resource access, improving both functionality and user engagement.',
     galleryImages: [
       '/BSDOC1.png',
@@ -60,8 +59,8 @@ const projectsData: Project[] = [
     tech3: 'Firebase',
     description: 'Sync is a sophisticated real-time collaboration platform designed to enhance team productivity and communication. This full-stack application leverages Next.js for a fast and scalable frontend, React for interactive UI components, and Firebase for robust backend services, including real-time database and authentication. It facilitates seamless collaboration across various functionalities from document editing to task assignments.',
     logo: '/Syncogo.svg',
-    githubUrl: 'https://github.com/your-username/Sync-repo',
-    websiteUrl: 'https://sync-example.com',
+    githubUrl: 'https://github.com/mantequilla45/Sync',
+    websiteUrl: 'https://sync-project.vercel.app/',
     contributions: 'My primary role in the Sync project involved developing the real-time document editing feature, utilizing Firebase’s real-time database capabilities to ensure seamless updates across all collaborators. I also implemented the user authentication system and designed the task management interface, focusing on user experience and data synchronization. I contributed significantly to the overall architecture, conducting rigorous testing and debugging to ensure a stable and performant application capable of handling multiple concurrent users.',
     galleryImages: [
       '/Landing.png',
