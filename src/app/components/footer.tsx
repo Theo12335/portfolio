@@ -1,3 +1,4 @@
+// app/components/footer.tsx
 'use client';
 
 import Link from 'next/link';
@@ -6,43 +7,43 @@ import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
 import { BsTwitterX } from 'react-icons/bs';
 
 const Footer: React.FC = () => (
-    <header className="flex flex-col w-full bg-[#0A162E] text-white justify-center items-center bg-opacity-80 pointer-events-auto py-[1.5%]">
-        <div className="flex flex-col items-center justify-left border-b border-white w-[60%] py-2">
-            <div className="flex flex-row items-center justify-between w-full mb-4">
-                <div className="flex flex-col first-letter:items-center">
-                    <div>
-                        <h2 className="flex text-3xl font-bold text-left">Connect with Me</h2>
-                    </div>
-                    <div>
-                        <p className="flex text-sm text-left pt-2 text-[#C1E8FF]">
-                Ready for opportunities and collaborations!
+  // Change <header> to <footer> for semantic correctness
+  <footer className="flex flex-col w-full bg-[#0A162E] text-white justify-center items-center bg-opacity-80 pointer-events-auto py-[1.5%]">
+    <div className="flex flex-col items-center justify-left border-b border-white w-[60%] py-2">
+      <div className="flex flex-row items-center justify-between w-full mb-4">
+        <div className="flex flex-col first-letter:items-center">
+          <div>
+            <h2 className="flex text-3xl font-bold text-left">Connect with Me</h2>
+          </div>
+          <div>
+            <p className="flex text-sm text-left pt-2 text-[#C1E8FF]">
+              Ready for opportunities and collaborations!
             </p>
-                    </div>
-                </div>
-                <div className="flex flex-row gap-5">
-                <Link href="https://github.com/Theo12335" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="pointer-events-auto">
-                  <FaGithub className="text-4xl hover:text-[#00a6c0] transition-colors duration-200" />
-                </Link>
-                <Link href="https://www.linkedin.com/in/theodore-romeo-bascon-a98a01282/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="pointer-events-auto">
-                  <FaLinkedin className="text-4xl hover:text-[#00a6c0] transition-colors duration-200" />
-                </Link>
-                <Link href="https://www.facebook.com/theodore.bascon.3/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="pointer-events-auto">
-                  <FaFacebook className="text-4xl hover:text-[#00a6c0] transition-colors duration-200" />
-                </Link>
-                <Link href="https://www.instagram.com/theodorebascon/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="pointer-events-auto">
-                  <FaInstagram className="text-4xl hover:text-[#00a6c0] transition-colors duration-200" />
-                </Link>
-                <Link href="https://x.com/rhoetheo" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)" className="pointer-events-auto">
-                  <BsTwitterX className="text-4xl hover:text-[#00a6c0] transition-colors duration-200" />
-                </Link>
-            </div>
-            </div>
+          </div>
         </div>
-        <div className="flex flex-col items-center justify-center w-full pt-[2%] text-[#00a6c0]">
-            <h1 className=" mb-1">© 2025 Theodore Romeo S. Bascon. All Rights Reserved.</h1>
+        <div className="flex flex-row gap-5">
+          <Link href="https://github.com/Theo12335" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="pointer-events-auto">
+            <FaGithub className="text-4xl hover:text-[#00a6c0] transition-colors duration-200" />
+          </Link>
+          <Link href="https://www.linkedin.com/in/theodore-romeo-bascon-a98a01282/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="pointer-events-auto">
+            <FaLinkedin className="text-4xl hover:text-[#00a6c0] transition-colors duration-200" />
+          </Link>
+          <Link href="https://www.facebook.com/theodore.bascon.3/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="pointer-events-auto">
+            <FaFacebook className="text-4xl hover:text-[#00a6c0] transition-colors duration-200" />
+          </Link>
+          <Link href="https://www.instagram.com/theodorebascon/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="pointer-events-auto">
+            <FaInstagram className="text-4xl hover:text-[#00a6c0] transition-colors duration-200" />
+          </Link>
+          <Link href="https://x.com/rhoetheo" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)" className="pointer-events-auto">
+            <BsTwitterX className="text-4xl hover:text-[#00a6c0] transition-colors duration-200" />
+          </Link>
         </div>
-        
-    </header>
+      </div>
+    </div>
+    <div className="flex flex-col items-center justify-center w-full pt-[2%] text-[#00a6c0]">
+      <h1 className=" mb-1">© 2025 Theodore Romeo S. Bascon. All Rights Reserved.</h1>
+    </div>
+  </footer>
 );
 
 export default Footer;

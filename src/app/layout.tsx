@@ -1,4 +1,4 @@
-
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Playfair_Display, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -54,10 +54,10 @@ export default function RootLayout({
       </head>
       <body
         className={`
-          ${playfair.variable} 
-          ${geistMono.variable} 
+          ${playfair.variable}
+          ${geistMono.variable}
           font-sans
-          bg-gradient-to-tl 
+          bg-gradient-to-tl
           from-[#0F2240] from-[0%]
           via-[#023A69] via-[50%]
           to-[#0A162E] to-[100%]
@@ -68,6 +68,12 @@ export default function RootLayout({
         <main className="relative z-[1]">
           {children}
         </main>
+        {/*
+          CRITICAL CHANGE: Give #modal-root a very high z-index and ensure it's positioned.
+          This ensures the portal's container is on top of everything else.
+          Using a value like z-[9999] as a test.
+        */}
+        <div id="modal-root" className="relative z-[9999]"></div>
       </body>
     </html>
   );

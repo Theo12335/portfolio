@@ -58,7 +58,7 @@ const projectsData: Project[] = [
     tech2: 'React',
     tech3: 'Firebase',
     description: 'Sync is a sophisticated real-time collaboration platform designed to enhance team productivity and communication. This full-stack application leverages Next.js for a fast and scalable frontend, React for interactive UI components, and Firebase for robust backend services, including real-time database and authentication. It facilitates seamless collaboration across various functionalities from document editing to task assignments.',
-    logo: '/Syncogo.svg',
+    logo: '/SyncLogo.svg',
     githubUrl: 'https://github.com/mantequilla45/Sync',
     websiteUrl: 'https://sync-project.vercel.app/',
     contributions: 'My primary role in the Sync project involved developing the real-time document editing feature, utilizing Firebase’s real-time database capabilities to ensure seamless updates across all collaborators. I also implemented the user authentication system and designed the task management interface, focusing on user experience and data synchronization. I contributed significantly to the overall architecture, conducting rigorous testing and debugging to ensure a stable and performant application capable of handling multiple concurrent users.',

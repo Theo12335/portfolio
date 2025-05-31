@@ -1,15 +1,17 @@
+// app/components/header.tsx
 'use client';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import Image from 'next/image';
 
 const Header: React.FC = () => {
-    const [showModal, setShowModal] = useState(false);
+    // Renamed state from showModal to showDropdown for clarity
+    const [showDropdown, setShowDropdown] = useState(false);
 
     return (
         <>
-            {/* Header */}
-            <header className="fixed top-0 left-0 right-0 z-10 w-full py-4 flex justify-center pointer-events-auto">
+            {/* Header (Navigation Bar) */}
+            <header className="fixed top-0 left-0 right-0 z-50 w-full py-4 flex justify-center pointer-events-auto">
                 <div
                     className="flex flex-row w-[95%] rounded-3xl py-3 items-center"
                     style={{ backgroundColor: 'rgba(7, 131, 152, 0.3)' }}
@@ -60,60 +62,65 @@ const Header: React.FC = () => {
                             Projects
                         </a>
 
-                        {/* Let's Connect Button */}
-                        <button
-                            onClick={() => setShowModal(true)}
-                            className="bg-[#00a6c0] text-white px-4 py-2 rounded-2xl hover:scale-105 hover:bg-[#557793] hover:text-white transition-all duration-150 font-bold"
+                        {/* Let's Connect Dropdown Trigger and Content */}
+                        {/* Added a relative container for the dropdown positioning */}
+                        <div
+                            className="relative"
+                            onMouseEnter={() => setShowDropdown(true)} // Show dropdown on hover
+                            onMouseLeave={() => setShowDropdown(false)} // Hide dropdown when mouse leaves
                         >
-                            Let&apos;s Connect!
-                        </button>
+                            <button
+                                className="bg-[#00a6c0] text-white px-4 py-2 rounded-2xl hover:scale-105 hover:bg-[#557793] hover:text-white transition-all duration-150 font-bold"
+                            >
+                                Let&apos;s Connect!
+                            </button>
+
+                            {/* Dropdown Content */}
+                            {showDropdown && (
+                                <div
+                                    // Position dropdown absolutely below the button
+                                    // z-200 ensures it's above the header (z-50) but below the ProjectModal (z-1000)
+                                    className="absolute right-0 mt-2 w-64 bg-[#041d56] bg-opacity-[80%] rounded-lg shadow-lg z-[200]
+                                                py-2 px-3 flex flex-col items-start"
+                                >
+                                    <h3 className="text-xl font-semibold mb-2 text-white px-2 py-1">Contact Me</h3>
+                                    {/* Each contact item is now a styled link */}
+                                    <p className="block w-full text-white text-base py-2 px-2">
+                                        <strong>Name:</strong> Theodore Romeo S. Bascon
+                                    </p>
+                                    <a
+                                        href="mailto:theodore12335@gmail.com"
+                                        className="block w-full text-white text-base py-2 px-2 rounded-md
+                                                   hover:bg-white hover:bg-opacity-10 hover:text-[#00a6c0] transition-colors"
+                                    >
+                                        <strong>Email:</strong> theodore12335@gmail.com
+                                    </a>
+                                    <a
+                                        href="https://wa.me/639762202341"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="block w-full text-white text-base py-2 px-2 rounded-md
+                                                   hover:bg-white hover:bg-opacity-10 hover:text-[#00a6c0] transition-colors"
+                                    >
+                                        <strong>WhatsApp:</strong> +63 976 220 2341
+                                    </a>
+                                    <a
+                                        href="https://t.me/Theorhoe"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="block w-full text-white text-base py-2 px-2 rounded-md
+                                                   hover:bg-white hover:bg-opacity-10 hover:text-[#00a6c0] transition-colors"
+                                    >
+                                        <strong>Telegram:</strong> @Theorhoe
+                                    </a>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </header>
 
-            {/* Contact Modal */}
-            {showModal && (
-                <div
-                    className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-                    onClick={() => setShowModal(false)}
-                >
-                    <div
-                        className="bg-black rounded-lg p-6 w-[40%] shadow-lg bg-opacity-[65%] relative"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <button
-                            onClick={() => setShowModal(false)}
-                            className="absolute top-2 right-2 text-white hover:text-[#00a6c0] text-2xl mr-4"
-                        >
-                            &times;
-                        </button>
-                        <div className="text-white px-[10%] py-[5%]">
-                            <h2 className="text-3xl font-semibold mb-4 text-center px-2 py-4">Contact Me</h2>
-                            <p className="mb-4 text-xl px-2 py-4"><strong>Name:</strong> Theodore Romeo S. Bascon</p>
-                            <a href="mailto:your.email@example.com" className="hover:text-[#00a6c0]">
-                                <p className="mb-4 text-xl hover:bg-white hover:bg-opacity-[10%] rounded-xl px-2 py-4"><strong>Email:</strong> theodore12335@gmail.com</p>
-                            </a>
-                            <a
-                                href="https://wa.me/639762202341"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="hover:text-[#00a6c0]"
-                            >
-                                <p className="mb-4 text-xl px-2 py-4 hover:bg-white hover:bg-opacity-[10%] rounded-xl"><strong>WhatsApp:</strong> +63 976 220 2341</p>
-                            </a>
-                            <a
-                                href="https://t.me/Theorhoe"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="hover:text-[#00a6c0]"
-                            >
-                                <p className="mb-4 text-xl px-2 py-4 hover:bg-white hover:bg-opacity-[10%] rounded-xl"><strong>Telegram:</strong> @Theorhoe</p>
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
-            )}
+            {/* Removed the Contact Modal JSX entirely as it's replaced by the dropdown */}
         </>
     );
 };

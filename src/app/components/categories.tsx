@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image'; // Import Next.js Image component
+import Link from 'next/link'; // <--- IMPORT Link HERE
 import { allIcons, categories, IconData, CategoryId } from '@/data/icons';
 
 const CategorizedIconsDisplay: React.FC = () => {
@@ -51,22 +52,45 @@ const CategorizedIconsDisplay: React.FC = () => {
         filteredIcons.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 justify-items-center">
             {filteredIcons.map((icon) => (
-              <div
-                key={icon.id}
-                className="flex flex-col backdrop-filter-none items-center p-4 rounded-lg
-                         transform hover:scale-110 transition-transform duration-200 cursor-pointer
-                         w-32 h-32 justify-center text-center group hover:shadow-md"
-              >
-                {/* Render the icon image directly */}
-                <Image
-                  src={icon.imageSrc}
-                  alt={icon.name}
-                  width={60} // Adjust width as needed for your icons
-                  height={60} // Adjust height as needed for your icons
-                  className="mb-2 object-contain" // object-contain ensures image fits without cropping
-                />
-                <span className="text-sm font-medium text-gray-200">{icon.name}</span>
-              </div>
+              // <--- ADD THIS CONDITIONAL LINK WRAPPER HERE ---
+              icon.link ? (
+                <Link
+                  key={icon.id} // Key should be on the outermost element of the map
+                  href={icon.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col backdrop-filter-none items-center p-4 rounded-lg
+                             transform hover:scale-110 transition-transform duration-200 cursor-pointer
+                             w-32 h-32 justify-center text-center group hover:shadow-md"
+                >
+                  <Image
+                    src={icon.imageSrc}
+                    alt={icon.name}
+                    width={60}
+                    height={60}
+                    className="mb-2 object-contain"
+                  />
+                  <span className="text-sm font-medium text-gray-200">{icon.name}</span>
+                </Link>
+              ) : (
+                // If no link, render a non-clickable div
+                <div
+                  key={icon.id}
+                  className="flex flex-col backdrop-filter-none items-center p-4 rounded-lg
+                             transform hover:scale-110 transition-transform duration-200
+                             w-32 h-32 justify-center text-center group hover:shadow-md" // Removed cursor-pointer as it's not clickable
+                >
+                  <Image
+                    src={icon.imageSrc}
+                    alt={icon.name}
+                    width={60}
+                    height={60}
+                    className="mb-2 object-contain"
+                  />
+                  <span className="text-sm font-medium text-gray-200">{icon.name}</span>
+                </div>
+              )
+              // <--- END OF CONDITIONAL LINK WRAPPER ---
             ))}
           </div>
         ) : (

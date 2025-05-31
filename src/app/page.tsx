@@ -53,11 +53,11 @@ export default function Home() {
     };
   }, [isModalOpen]);
 
-  const handleOpenModal = () => { // For Carousel
+  const handleOpenModal = () => {
     setIsModalOpen(true);
   };
 
-  const handleCloseModal = () => { // For Carousel
+  const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
@@ -75,12 +75,12 @@ export default function Home() {
         {/* Hero/Intro section */}
         <div className="flex flex-col text-center min-h-screen">
           <div className="flex mt-[20%] text-center justify-center">
-            <h3 className="text-xl">
+            <h3 className="text-3xl">
               {animatedIntroText}
             </h3>
           </div>
           <div className="mt-2 text-center">
-            <h1 className="text-5xl font-bold">
+            <h1 className="text-6xl font-bold">
               {startAnimatedText && (
                 <>
                   <span className="font-semibold text-[#00a6c0]">{animatedText}</span>
@@ -90,7 +90,7 @@ export default function Home() {
             </h1>
           </div>
           {showArrow && (
-            <div className="mt-[30%] mb-20 h-10 flex items-center justify-center">
+            <div className="mt-[30%] mb-20 h-10 flex items-center justify-center z-30 pointer-events-auto">
               <a
                 href="#about-me"
                 onClick={(e) => {
@@ -100,7 +100,7 @@ export default function Home() {
                     aboutMeSection.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
-                className="cursor-pointer pointer-events-auto"
+                className="cursor-pointer pointer-events-auto z-50"
                 aria-label="Scroll to About Me section"
               >
                 <ChevronDownIcon className="h-10 w-10 text-white animate-bounce" />
@@ -183,8 +183,6 @@ export default function Home() {
             <CategorizedIconsDisplay />
           </div>
         </div>
-
-        {/* Projects Section */}
         <div className="px-[5%] pb-[3%] pt-[6%]" id="projects">
           <div className="flex flex-col items-center justify-top mb-2 min-h-[90%] bg-white bg-opacity-20 rounded-lg px-[10%]">
             <h2 className="text-5xl font-bold text-center mt-5 mb-8">My <span className="text-[#C1E8FF]">Projects</span></h2>
