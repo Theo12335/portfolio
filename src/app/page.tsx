@@ -131,7 +131,7 @@ export default function Home() {
                             </div>
                             <div className="flex mt-[5%] justify-center md:justify-start">
                                 <a
-                                    href="https://drive.google.com/file/d/1zj7DAb4QVqkITxBzcLarszZHf9VsmJh1/view?usp=sharing"
+                                    href="https://drive.google.com/file/d/1pc_Do0uJVMQbg6sQm8KBn_6J3L3lc6VY/view?usp=sharing"
                                     target="Resume"
                                     rel="noopener noreferrer"
                                     className="bg-[#00a6c0] text-white px-4 py-2 rounded-2xl hover:scale-105 hover:bg-[#557793] hover:text-white transition-all duration-150 font-bold pointer-events-auto">
@@ -143,7 +143,7 @@ export default function Home() {
                         </div>
                         {/* MODIFIED: Container for Astronaut and Social Icons */}
                         <div className="hidden items-center w-full md:w-3/10 overflow-hidden min-h-[95%] mt-5 md:mt-[-7%] md:flex md:flex-col">
-                            <div className="justify-center py-[10%] hidden md:block"> {/* This already correctly uses hidden md:block */}
+                            <div className="justify-center py-[10%] hidden md:block mt-[18%]"> {/* This already correctly uses hidden md:block */}
                                 <FloatingAstronaut
                                     src="/astronaut.svg"
                                     alt="Floating Astronaut"
