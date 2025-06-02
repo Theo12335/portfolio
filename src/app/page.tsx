@@ -13,6 +13,8 @@ import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
 import { BsTwitterX } from 'react-icons/bs';
 import CategorizedIconsDisplay from '@/app/components/categories';
 import Carousel from '@/app/components/carousel';
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export default function Home() {
     const wordsToAnimate = ["Full Stack Developer", "UI/UX Designer"];
@@ -76,6 +78,8 @@ export default function Home() {
                     <div className="flex mt-[25%] sm:mt-[20%] text-center justify-center">
                         <h3 className="text-lg md:text-xl">
                             {animatedIntroText}
+                            <Analytics />
+                            <SpeedInsights />
                         </h3>
                     </div>
                     <div className="mt-2 text-center">
