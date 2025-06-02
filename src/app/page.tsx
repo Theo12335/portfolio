@@ -15,7 +15,7 @@ import CategorizedIconsDisplay from '@/app/components/categories';
 import Carousel from '@/app/components/carousel';
 
 export default function Home() {
-    const wordsToAnimate = ["Front-End Developer", "UI/UX Designer"];
+    const wordsToAnimate = ["Full Stack Developer", "UI/UX Designer"];
     const introGreeting = React.useMemo(() => ["Hello, I'm a Junior"], []);
 
     const [startAnimatedText, setStartAnimatedText] = useState(false);
@@ -120,7 +120,7 @@ export default function Home() {
                                 <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold">
                                     Theodore Romeo S. Bascon
                                     <span className="block text-xl sm:text-2xl lg:text-3xl font-bold text-[#C1E8FF] mt-1 md:ml-6 md:inline md:mt-0">
-                                        Front-End Developer
+                                        Full Stack Developer
                                     </span>
                                 </h1>
                             </div>
