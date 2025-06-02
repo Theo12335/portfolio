@@ -25,7 +25,7 @@ export const allIcons: IconData[] = [
   { id: 'c_programming', name: 'C Programming', category: 'core_stack', imageSrc: '/c.svg', link: 'https://en.wikipedia.org/wiki/C_(programming_language)' },
   { id: 'csharp', name: 'C#', category: 'core_stack', imageSrc: '/csharp.svg', link: 'https://learn.microsoft.com/en-us/dotnet/csharp/' },
   { id: 'python', name: 'Python', category: 'core_stack', imageSrc: '/python.svg', link: 'https://www.python.org/' },
-  { id: 'sql', name: 'SQL', category: 'core_stack', imageSrc: '/sql.svg', link: 'https://www.w3schools.com/sql/' },
+  { id: 'sql', name: 'SQL', category: 'core_stack', imageSrc: '/SQL.svg', link: 'https://www.w3schools.com/sql/' },
   { id: 'supabase', name: 'Supabase', category: 'core_stack', imageSrc: '/supabase.svg', link: 'https://supabase.com/' },
   { id: 'chatgpt', name: 'ChatGPT', category: 'core_stack', imageSrc: '/chatgpt.svg', link: 'https://chat.openai.com/' },
   { id: 'airtable', name: 'Airtable', category: 'core_stack', imageSrc: '/airtable.svg', link: 'https://airtable.com/' },
