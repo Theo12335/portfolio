@@ -3,7 +3,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'; // Ensure @heroicons/react is installed
+import { Bars3Icon, ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/outline'; // Ensure @heroicons/react is installed
 
 const Header: React.FC = () => {
     const [showConnectDesktopDropdown, setShowConnectDesktopDropdown] = useState(false);
@@ -77,7 +77,7 @@ const Header: React.FC = () => {
                         <a href="#skills" onClick={(e) => { e.preventDefault(); document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' }); }} className="mr-4 hover:scale-110 hover:text-white transition-all duration-300">Tech Stack</a>
                         <a href="#projects" onClick={(e) => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }); }} className="mr-4 hover:scale-110 hover:text-white transition-all duration-300">Projects</a>
                         <div className="relative" onMouseEnter={handleMouseEnterConnect} onMouseLeave={handleMouseLeaveConnect}>
-                            <button className="bg-[#00a6c0] text-white px-4 py-2 rounded-2xl hover:scale-105 hover:bg-[#557793] hover:text-white transition-all duration-150 font-bold">Let&apos;s Connect!</button>
+                            <button className="flex bg-[#00a6c0] text-white px-4 py-2 rounded-2xl hover:scale-105 hover:bg-[#557793] hover:text-white transition-all duration-150 font-bold">Let&apos;s Connect! <ChevronDownIcon className="flex mt-1 ml-2 h-4 w-4 justify-center items-center"/></button>
                             {showConnectDesktopDropdown && (
                                 <div className="absolute right-0 mt-2 w-64 bg-[#041d56] bg-opacity-[80%] rounded-lg shadow-lg z-[60] py-2 px-3 flex flex-col items-start">
                                     <h3 className="text-xl font-semibold mb-2 text-white px-2 py-1">Contact Me</h3>
@@ -90,8 +90,6 @@ const Header: React.FC = () => {
                             )}
                         </div>
                     </nav>
-
-                    {/* --- MOBILE VIEW --- */}
                     <div className="flex md:hidden w-full items-center justify-between">
                         <div onClick={handleLogoScrollToHero} className="cursor-pointer">
                             <Image src="/logo.svg" alt="Logo" width={60} height={60} priority />
@@ -102,8 +100,6 @@ const Header: React.FC = () => {
                             </button>
                         </div>
                     </div>
-
-                    {/* Mobile Menu Dropdown */}
                     {isMobileMenuOpen && (
                         <div
                             className="md:hidden absolute top-full left-0 right-0 mt-1 w-full rounded-b-2xl shadow-xl py-3 z-40" // z-40 to be below header bar content but above page
@@ -122,10 +118,9 @@ const Header: React.FC = () => {
                             </nav>
                         </div>
                     )}
-                </div> {/* End of inner rounded bar */}
+                </div>
             </header>
 
-            {/* "Let's Connect!" MOBILE MODAL (Popup Window) */}
             {showConnectMobileModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[100] p-4 md:hidden transition-opacity duration-300 ease-in-out pointer-events-auto"> {/* MODIFIED: Added pointer-events-auto */}
                     <div className="bg-[#072045] p-5 sm:p-6 rounded-xl shadow-2xl max-w-xs w-full relative transform transition-all duration-300 ease-in-out scale-100 opacity-100">
