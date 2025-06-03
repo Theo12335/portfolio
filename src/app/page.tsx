@@ -290,7 +290,7 @@ export default function Home() {
             {/* Mobile Certifications Modal - Renders only when isCertificationsModalOpen is true */}
             {isCertificationsModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-70 z-[70] flex items-center justify-center p-4">
-                    <div className="relative bg-[#041d56] bg-opacity-[90%] rounded-lg shadow-xl p-6 w-full max-w-sm mx-auto flex flex-col items-center justify-center gap-6">
+                    <div className="relative bg-[#041d56] bg-opacity-[40%] rounded-lg shadow-xl p-6 w-full max-w-sm mx-auto flex flex-col items-center justify-center gap-6">
                         {/* Close Button */}
                         <button
                             onClick={handleCloseCertificationsModal}
