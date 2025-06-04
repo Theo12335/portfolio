@@ -170,9 +170,8 @@ export default function Home() {
                                 </p>
                             </div>
                             <div className="flex mt-[3%] justify-center md:justify-start ml-2">
-                                {/* Resume Button */}
                                 <a
-                                    href="https://drive.google.com/file/d/1pc_Do0uJVMQbg6sQm8KBn_6J3L3lc6VY/view?usp=sharing"
+                                    href="https://drive.google.com/file/d/1OtSl_4Nag1Vd4vHfqT-Tj9cmEOXetMy4/view?usp=sharing"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="bg-[#00a6c0] bg-opacity-[60%] text-white px-10 py-2 rounded-2xl hover:scale-105 hover:bg-[#557793] hover:text-white transition-all duration-150 font-bold pointer-events-auto">
@@ -308,9 +307,7 @@ export default function Home() {
                                 </a>
                                 <h1 className="flex items-center justify-center text-center mt-4 text-white">SEO Certification</h1>
                             </div>
-
-                            {/* WordPress Certification - Mobile Modal */}
-                            <a
+c                            <a
                                 href="https://drive.google.com/file/d/1sqxZH4m9gmd5vX9sywU0S3u2hKVLAXkb/view?usp=sharing"
                                 target="_blank"
                                 rel="noopener noreferrer"
