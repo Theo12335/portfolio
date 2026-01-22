@@ -77,7 +77,7 @@ const Header: React.FC = () => {
                         <a href="#skills" onClick={(e) => { e.preventDefault(); document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' }); }} className="mr-4 hover:scale-110 hover:text-white transition-all duration-300">Tech Stack</a>
                         <a href="#projects" onClick={(e) => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }); }} className="mr-4 hover:scale-110 hover:text-white transition-all duration-300">Projects</a>
                         <div className="relative" onMouseEnter={handleMouseEnterConnect} onMouseLeave={handleMouseLeaveConnect}>
-                            <button className="flex bg-[#00a6c0] text-white px-4 py-2 rounded-2xl hover:scale-105 hover:bg-[#557793] hover:text-white transition-all duration-150 font-bold">Let&apos;s Connect! <ChevronDownIcon className="flex mt-1 ml-2 h-4 w-4 justify-center items-center"/></button>
+                            <button className="flex bg-[#00a6c0] text-white px-4 py-2 rounded-2xl hover:scale-105 hover:bg-[#557793] hover:text-white transition-all duration-150 font-bold">Let&apos;s Connect! <ChevronDownIcon className="flex mt-1 ml-2 h-4 w-4 justify-center items-center" /></button>
                             {showConnectDesktopDropdown && (
                                 <div className="absolute right-0 mt-2 w-64 bg-[#041d56] bg-opacity-[80%] rounded-lg shadow-lg z-[60] py-2 px-3 flex flex-col items-start">
                                     <h3 className="text-xl font-semibold mb-2 text-white px-2 py-1">Contact Me</h3>
