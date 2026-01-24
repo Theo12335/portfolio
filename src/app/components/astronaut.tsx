@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image, { ImageProps } from 'next/image';
 
 interface FloatingAstronautProps extends Omit<ImageProps, 'className' | 'style'> {
@@ -19,8 +19,26 @@ const FloatingAstronaut = ({
     ...imageProps
 }: FloatingAstronautProps) => {
     const [position, setPosition] = useState({ x: 0, y: 0 });
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    // Only animate when visible
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => setIsVisible(entry.isIntersecting),
+            { threshold: 0.1 }
+        );
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
 
     useEffect(() => {
+        if (!isVisible) return;
+
         const moveInterval = setInterval(() => {
             const randomX = (Math.random() * 2 - 1) * floatRange;
             const randomY = (Math.random() * 2 - 1) * floatRange;
@@ -28,10 +46,9 @@ const FloatingAstronaut = ({
         }, floatDuration);
 
         return () => clearInterval(moveInterval);
-    }, [floatRange, floatDuration]);
+    }, [floatRange, floatDuration, isVisible]);
 
     const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
-        console.log('Astronaut image loaded');
         if (onLoad) {
             onLoad(e);
         }
@@ -39,6 +56,7 @@ const FloatingAstronaut = ({
 
     return (
         <div
+            ref={containerRef}
             className="relative transition-transform ease-in-out"
             style={{
                 transform: `translate(${position.x}px, ${position.y}px)`,

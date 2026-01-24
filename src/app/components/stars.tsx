@@ -51,19 +51,32 @@ const InteractiveStarryBg = () => {
             }
         };
 
-        const initShootingStars = () => {
-            // Periodically create a shooting star for mobile
-            if (isMobile && Math.random() < 0.02 && shootingStars.length < 3) { // Control frequency and max count
-                shootingStars.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height / 2, // Start mostly from top half
-                    len: Math.random() * 80 + 50,
-                    speed: Math.random() * 5 + 5,
-                    angle: Math.PI / 4 + (Math.random() * Math.PI / 6 - Math.PI / 12), // Angle downwards
-                    opacity: 1,
-                });
+        const createShootingStar = () => {
+            // Random starting position - mostly from top and left edges
+            const startFromTop = Math.random() > 0.3;
+            let x, y;
+
+            if (startFromTop) {
+                x = Math.random() * canvas.width;
+                y = -10;
+            } else {
+                x = -10;
+                y = Math.random() * canvas.height * 0.5;
             }
+
+            shootingStars.push({
+                x,
+                y,
+                len: Math.random() * 120 + 80,
+                speed: Math.random() * 12 + 8,
+                angle: Math.PI / 4 + (Math.random() * 0.4 - 0.2), // ~45 degrees diagonal with variation
+                opacity: 1,
+            });
         };
+
+        // Spawn shooting stars at intervals
+        let lastShootingStarTime = 0;
+        const shootingStarInterval = 1200; // New star every 1.2 seconds
 
 
         const drawCommonStars = () => {
@@ -76,36 +89,70 @@ const InteractiveStarryBg = () => {
         };
 
         const drawShootingStars = () => {
-            shootingStars.forEach((ss, index) => {
-                ctx.beginPath();
+            for (let i = shootingStars.length - 1; i >= 0; i--) {
+                const ss = shootingStars[i];
                 const tailX = ss.x - ss.len * Math.cos(ss.angle);
                 const tailY = ss.y - ss.len * Math.sin(ss.angle);
-                const gradient = ctx.createLinearGradient(ss.x, ss.y, tailX, tailY);
-                gradient.addColorStop(0, `rgba(255, 255, 255, ${ss.opacity})`);
-                gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
 
+                // Draw outer glow
+                ctx.beginPath();
                 ctx.moveTo(ss.x, ss.y);
                 ctx.lineTo(tailX, tailY);
-                ctx.strokeStyle = gradient;
-                ctx.lineWidth = 2;
+                const glowGradient = ctx.createLinearGradient(ss.x, ss.y, tailX, tailY);
+                glowGradient.addColorStop(0, `rgba(6, 182, 212, ${ss.opacity * 0.5})`);
+                glowGradient.addColorStop(0.5, `rgba(103, 232, 249, ${ss.opacity * 0.2})`);
+                glowGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                ctx.strokeStyle = glowGradient;
+                ctx.lineWidth = 4;
+                ctx.lineCap = 'round';
                 ctx.stroke();
 
-                // Move shooting star
+                // Draw main streak
+                ctx.beginPath();
+                ctx.moveTo(ss.x, ss.y);
+                ctx.lineTo(tailX, tailY);
+                const gradient = ctx.createLinearGradient(ss.x, ss.y, tailX, tailY);
+                gradient.addColorStop(0, `rgba(255, 255, 255, ${ss.opacity})`);
+                gradient.addColorStop(0.3, `rgba(103, 232, 249, ${ss.opacity * 0.7})`);
+                gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = 2;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+
+                // Draw bright head
+                ctx.beginPath();
+                ctx.arc(ss.x, ss.y, 3, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${ss.opacity})`;
+                ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+                ctx.shadowBlur = 10;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                // Move shooting star diagonally
                 ss.x += ss.speed * Math.cos(ss.angle);
                 ss.y += ss.speed * Math.sin(ss.angle);
-                ss.opacity -= 0.01; // Fade out
+                ss.opacity -= 0.006;
 
                 // Remove if faded or off-screen
-                if (ss.opacity <= 0 || ss.x > canvas.width + ss.len || ss.y > canvas.height + ss.len) {
-                    shootingStars.splice(index, 1);
+                if (ss.opacity <= 0 || ss.x > canvas.width + 50 || ss.y > canvas.height + 50) {
+                    shootingStars.splice(i, 1);
                 }
-            });
+            }
         };
 
-        const animateDesktop = () => {
+        const animateDesktop = (timestamp: number = 0) => {
             animationFrameId.current = requestAnimationFrame(animateDesktop);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawCommonStars();
+
+            // Spawn new shooting star at intervals
+            if (timestamp - lastShootingStarTime > shootingStarInterval && shootingStars.length < 3) {
+                createShootingStar();
+                lastShootingStarTime = timestamp;
+            }
+
+            drawShootingStars();
 
             stars.forEach(star1 => {
                 const distToMouse = Math.sqrt(Math.pow(star1.x - mouse.x, 2) + Math.pow(star1.y - mouse.y, 2));
@@ -127,12 +174,18 @@ const InteractiveStarryBg = () => {
             });
         };
 
-        const animateMobile = () => {
+        const animateMobile = (timestamp: number = 0) => {
             animationFrameId.current = requestAnimationFrame(animateMobile);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawCommonStars(); // Galaxy stars
-            initShootingStars(); // Potentially add new shooting stars
-            drawShootingStars(); // Draw and move existing shooting stars
+            drawCommonStars();
+
+            // Spawn new shooting star at intervals (more frequent on mobile)
+            if (timestamp - lastShootingStarTime > 1000 && shootingStars.length < 4) {
+                createShootingStar();
+                lastShootingStarTime = timestamp;
+            }
+
+            drawShootingStars();
         };
 
         // --- Setup ---
@@ -143,11 +196,17 @@ const InteractiveStarryBg = () => {
             checkScreenSize(); // This sets canvas width/height and isMobile
 
             if (isMobile) {
-                initCommonStars(200); // More stars for a galaxy feel
-                shootingStars = []; // Reset shooting stars
+                initCommonStars(80); // Reduced for better mobile performance
+                shootingStars = [];
+                // Spawn initial shooting stars
+                createShootingStar();
                 animateMobile();
             } else {
-                initCommonStars(150); // Original number for desktop
+                initCommonStars(100); // Reduced for better performance
+                shootingStars = [];
+                // Spawn initial shooting stars immediately
+                createShootingStar();
+                setTimeout(() => createShootingStar(), 500);
                 animateDesktop();
             }
         };
@@ -171,10 +230,10 @@ const InteractiveStarryBg = () => {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
                 if (isMobile) {
-                    initCommonStars(200);
+                    initCommonStars(80);
                     shootingStars = [];
                 } else {
-                    initCommonStars(150);
+                    initCommonStars(100);
                 }
             }
         };

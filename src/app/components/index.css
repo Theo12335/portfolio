@@ -9,3 +9,14 @@
     transform: scale(1);
     transform-origin: center;
   }
+
+.responsive-wrapper canvas {
+    outline: none !important;
+    border: none !important;
+}
+
+.responsive-wrapper canvas:focus,
+.responsive-wrapper canvas:focus-visible {
+    outline: none !important;
+    border: none !important;
+}

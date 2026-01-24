@@ -20,14 +20,43 @@ useGLTF.preload(GLTF_PATH);
 useTexture.preload(TEXTURE_PATH);
 
 export default function App() {
+    const containerRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(true);
+    const [isPaused, setIsPaused] = useState(false);
+
+    // Pause physics when not visible or scrolled past
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsVisible(entry.isIntersecting);
+                setIsPaused(!entry.isIntersecting);
+            },
+            { threshold: 0.1 }
+        );
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <div className="responsive-wrapper">
-            <Canvas camera={{ position: [0, 0, 13], fov: 25 }}>
+        <div className="responsive-wrapper" ref={containerRef}>
+            <Canvas
+                camera={{ position: [0, 0, 13], fov: 28 }}
+                frameloop={isVisible ? 'demand' : 'never'}
+                performance={{ min: 0.5 }}
+            >
                 <ambientLight intensity={Math.PI} />
-                <Physics interpolate gravity={[0, -40, 0]} timeStep={1 / 60}>
+                <Physics
+                    interpolate
+                    gravity={[0, -40, 0]}
+                    timeStep={1 / 60}
+                    paused={isPaused}
+                >
                     <Band />
                 </Physics>
-                {/* Remove 'background' prop and the <color> child */}
                 <Environment blur={0.75}>
                     <Lightformer intensity={2} color="white" position={[0, -1, 5]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
                     <Lightformer intensity={3} color="white" position={[-1, -1, 1]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
@@ -45,6 +74,7 @@ function Band({ maxSpeed = 50, minSpeed = 10 }) {
     const { nodes, materials } = useGLTF(GLTF_PATH);
     const texture = useTexture(TEXTURE_PATH);
     const { width, height } = useThree((state) => state.size);
+    const invalidate = useThree((state) => state.invalidate);
 
     // Initialize with valid points
     const [curve] = useState(() => {
@@ -56,6 +86,7 @@ function Band({ maxSpeed = 50, minSpeed = 10 }) {
 
     const [dragged, drag] = useState(false);
     const [hovered, hover] = useState(false);
+    const frameCount = useRef(0);
 
     useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
     useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
@@ -71,6 +102,11 @@ function Band({ maxSpeed = 50, minSpeed = 10 }) {
 
     useFrame((state, delta) => {
         if (!fixed.current || !j1.current || !j2.current || !j3.current || !card.current) return;
+
+        // Always invalidate when dragging, otherwise every 2nd frame for smoother idle
+        frameCount.current++;
+        const shouldUpdate = dragged || frameCount.current % 2 === 0;
+        if (!shouldUpdate) return;
 
         if (dragged) {
             vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
@@ -107,6 +143,9 @@ function Band({ maxSpeed = 50, minSpeed = 10 }) {
         ang.copy(card.current.angvel());
         rot.copy(card.current.rotation());
         card.current.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z });
+
+        // Request next frame render
+        invalidate();
     });
 
     texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
@@ -114,7 +153,7 @@ function Band({ maxSpeed = 50, minSpeed = 10 }) {
     return (
         <>
             <group position={[0, 4, 0]}>
-                <RigidBody ref={fixed} {...segmentProps} type="fixed" position={[3.5, 0, 0]} />
+                <RigidBody ref={fixed} {...segmentProps} type="fixed" position={[2.5, 0, 0]} />
                 <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}>
                     <BallCollider args={[0.1]} />
                 </RigidBody>
