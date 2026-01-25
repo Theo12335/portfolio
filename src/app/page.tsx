@@ -198,7 +198,7 @@ export default function Home() {
                                 >
                                     <p className="text-base sm:text-lg text-gray-400 max-w-md leading-relaxed">
                                         I build <span className="text-white font-medium">high-performance web applications</span> with modern technologies.
-                                        <span className="text-gray-500"> Focused on</span> <span className="text-[#06b6d4]">clean code</span> <span className="text-gray-500">&</span> <span className="text-[#06b6d4]">great user experiences</span>.
+                                        <span className="text-gray-400"> Focused on</span> <span className="text-[#06b6d4]">clean code</span> <span className="text-gray-400">&</span> <span className="text-[#06b6d4]">great user experiences</span>.
                                     </p>
                                 </motion.div>
                             )}
@@ -270,7 +270,8 @@ export default function Home() {
                                             href="https://github.com/Theo12335"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-gray-500 hover:text-white transition-colors duration-300"
+                                            aria-label="GitHub Profile"
+                                            className="text-gray-400 hover:text-white transition-colors duration-300"
                                             whileHover={{ scale: 1.15, y: -2 }}
                                             whileTap={{ scale: 0.95 }}
                                         >
@@ -282,7 +283,8 @@ export default function Home() {
                                             href="https://www.linkedin.com/in/theodore-romeo-bascon-a98a01282/"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-gray-500 hover:text-[#0077b5] transition-colors duration-300"
+                                            aria-label="LinkedIn Profile"
+                                            className="text-gray-400 hover:text-[#0077b5] transition-colors duration-300"
                                             whileHover={{ scale: 1.15, y: -2 }}
                                             whileTap={{ scale: 0.95 }}
                                         >
@@ -294,7 +296,8 @@ export default function Home() {
                                             href="https://x.com/rhoetheo"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-gray-500 hover:text-white transition-colors duration-300"
+                                            aria-label="X (Twitter) Profile"
+                                            className="text-gray-400 hover:text-white transition-colors duration-300"
                                             whileHover={{ scale: 1.15, y: -2 }}
                                             whileTap={{ scale: 0.95 }}
                                         >
@@ -362,9 +365,9 @@ export default function Home() {
                     {/* Section Title */}
                     <ScrollReveal direction="up">
                         <div className="flex flex-col items-center justify-center mb-12 sm:mb-16 md:mb-20 relative">
-                            <h3 className="text-4xl sm:text-5xl lg:text-6xl font-bold">
+                            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold">
                                 About <span className="bg-gradient-to-r from-[#06b6d4] to-[#67e8f9] bg-clip-text text-transparent">Me</span>
-                            </h3>
+                            </h2>
                             <div className="w-20 h-1 bg-gradient-to-r from-transparent via-[#06b6d4] to-transparent mt-6"></div>
                         </div>
                     </ScrollReveal>
@@ -376,12 +379,12 @@ export default function Home() {
                             <ScrollReveal direction="left" delay={0.2}>
                                 <div className="mb-8 relative">
                                     <p className="text-[#06b6d4] text-sm font-medium tracking-wide mb-2">Hello, I&apos;m</p>
-                                    <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                                    <h3 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                                         Theodore Romeo S. Bascon
-                                    </h1>
-                                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-[#06b6d4] mt-3">
+                                    </h3>
+                                    <p className="text-xl sm:text-2xl lg:text-3xl font-semibold text-[#06b6d4] mt-3">
                                         Software Developer
-                                    </h2>
+                                    </p>
                                 </div>
                             </ScrollReveal>
 
@@ -541,7 +544,7 @@ export default function Home() {
                             {/* Social Links - Cleaner */}
                             <ScrollReveal direction="up" delay={0.6}>
                                 <div className="flex items-center justify-center lg:justify-start gap-2">
-                                    <span className="text-xs text-gray-500 mr-2">Find me on</span>
+                                    <span className="text-xs text-gray-400 mr-2">Find me on</span>
                                     <div className="flex gap-1">
                                         <Magnetic>
                                             <Link href="https://github.com/Theo12335" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="pointer-events-auto p-2.5 rounded-lg hover:bg-white/5 transition-all duration-300 group">
@@ -630,11 +633,11 @@ export default function Home() {
                         <button
                             onClick={handleCloseCertificationsModal}
                             className="absolute top-3 right-3 text-white hover:text-[#06b6d4] transition-colors duration-150"
-                            aria-label="Close certifications"
+                            aria-label="Close certifications modal"
                         >
                             <XMarkIcon className="h-6 w-6" />
                         </button>
-                        <h2 className="text-2xl font-bold text-white mb-4">My Certifications</h2>
+                        <h3 className="text-2xl font-bold text-white mb-4">My Certifications</h3>
                         <div className="flex flex-col items-center justify-center gap-6 w-full">
                             {/* HubSpot Certification (SEO) - Mobile Modal */}
                             <div className="academy-badge hover:scale-105 transition-transform duration-150">

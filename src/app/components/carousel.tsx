@@ -30,15 +30,15 @@ const projectsData: Project[] = [
         id: 1,
         image: '/futurethinkedge/colored-logo.svg',
         hoverImage: '/futurethinkedge/Screenshot 2026-01-23 033017.png',
-        title: 'FutureThink Edge',
+        title: 'Guided Edge',
         shortDescription: 'An AI-powered adaptive learning platform designed for students with ADHD, featuring gamified learning with superhero personas and personalized experiences.',
         tech: ['Next.js', 'TypeScript', 'FastAPI', 'PostgreSQL', 'AI/ML'],
-        description: 'FutureThink Edge is a comprehensive AI-powered adaptive learning platform designed specifically for students with ADHD and other learning differences. The platform provides personalized, gamified learning experiences with superhero personas, making education engaging and accessible.',
+        description: 'Guided Edge is a comprehensive AI-powered adaptive learning platform designed specifically for students with ADHD and other learning differences. The platform provides personalized, gamified learning experiences with superhero personas, making education engaging and accessible.',
         logo: '/futurethinkedge/colored-logo.svg',
         websiteUrl: 'https://futurethinkedge.org',
         contributions: 'As the Front-End Lead and AI Integration Developer, I architected the entire frontend application using Next.js 15 with TypeScript. I implemented the AI-powered classroom integration with multiple AI model routing (Gemini, DeepSeek, Claude), developed the Brain Gym with 39+ cognitive training games, and built the emotion detection system using ResNet-50 + CBAM. I also contributed to the game development aspects and ensured GDPR/FERPA compliance throughout the platform.',
         galleryImages: ['/futurethinkedge/Screenshot 2026-01-23 033017.png', '/futurethinkedge/Screenshot 2026-01-23 033347.png', '/futurethinkedge/Screenshot 2026-01-23 033415.png', '/futurethinkedge/Screenshot 2026-01-23 033518.png', '/futurethinkedge/Screenshot 2026-01-23 033608.png'],
-        projectInfo: 'FutureThink Edge features research-validated knowledge tracing with a 92-94% AUC target, mental health signal detection with 988 Lifeline integration, and a dynamic XP engine with streak multipliers. The platform supports multiple user roles including students, teachers, parents, admins, clinical staff, and board members, each with tailored dashboards and features.',
+        projectInfo: 'Guided Edge features research-validated knowledge tracing with a 92-94% AUC target, mental health signal detection with 988 Lifeline integration, and a dynamic XP engine with streak multipliers. The platform supports multiple user roles including students, teachers, parents, admins, clinical staff, and board members, each with tailored dashboards and features.',
         color: '#FE6462',
     },
     {
@@ -53,7 +53,7 @@ const projectsData: Project[] = [
         websiteUrl: 'https://futurethinkhub.org',
         contributions: 'I built the entire website from scratch, implementing a modern Next.js 15 application with App Router architecture. I integrated GoHighLevel CRM for contact management and payment processing, developed the donation system with both one-time and recurring payment options, created dynamic initiative pages, and built the blog and events system. I also implemented SEO optimization and ensured responsive design across all devices.',
         galleryImages: ['/futurethinkhub/Screenshot 2026-01-23 074356.png', '/futurethinkhub/Screenshot 2026-01-23 074414.png', '/futurethinkhub/Screenshot 2026-01-23 074429.png', '/futurethinkhub/Screenshot 2026-01-23 074445.png', '/futurethinkhub/Screenshot 2026-01-23 074507.png', '/futurethinkhub/Screenshot 2026-01-23 074548.png', '/futurethinkhub/Screenshot 2026-01-23 074608.png'],
-        projectInfo: 'The platform serves the Baltimore community with programs including Grocery Giveaway Saturdays, community fridges, holiday food drives, culinary sponsorships, and the FutureThink Edge AI education platform. It features donation processing, volunteer registration, event management, and a photo gallery showcasing the nonprofit\'s impact.',
+        projectInfo: 'The platform serves the Baltimore community with programs including Grocery Giveaway Saturdays, community fridges, holiday food drives, culinary sponsorships, and the Guided Edge AI education platform. It features donation processing, volunteer registration, event management, and a photo gallery showcasing the nonprofit\'s impact.',
         color: '#94D96B',
     },
     {
@@ -386,12 +386,14 @@ const Carousel: React.FC<CarouselProps> = ({ onOpenModal, onCloseModal }) => {
                             <button
                                 className="hidden sm:block absolute left-2 md:left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all duration-300 backdrop-blur-sm border border-white/10 z-10"
                                 onClick={() => { stopAutoCycle(); goToSlide(currentIndex - 1, -1); startAutoCycle(); }}
+                                aria-label="Previous project"
                             >
                                 <ChevronLeftIcon className="w-5 h-5" />
                             </button>
                             <button
                                 className="hidden sm:block absolute right-2 md:right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all duration-300 backdrop-blur-sm border border-white/10 z-10"
                                 onClick={() => { stopAutoCycle(); goToSlide(currentIndex + 1, 1); startAutoCycle(); }}
+                                aria-label="Next project"
                             >
                                 <ChevronRightIcon className="w-5 h-5" />
                             </button>
@@ -401,8 +403,8 @@ const Carousel: React.FC<CarouselProps> = ({ onOpenModal, onCloseModal }) => {
 
                 {/* Dot Indicators */}
                 {slideCount > 1 && (
-                    <div className="flex justify-center gap-2 mt-6">
-                        {projectsData.map((_, index) => (
+                    <div className="flex justify-center gap-2 mt-6" role="tablist" aria-label="Project slides">
+                        {projectsData.map((project, index) => (
                             <button
                                 key={index}
                                 onClick={() => { stopAutoCycle(); goToSlide(index, index > currentIndex ? 1 : -1); startAutoCycle(); }}
@@ -411,6 +413,9 @@ const Carousel: React.FC<CarouselProps> = ({ onOpenModal, onCloseModal }) => {
                                         ? 'w-8 bg-[#06b6d4]'
                                         : 'bg-white/20 hover:bg-white/40'
                                 }`}
+                                aria-label={`Go to project ${index + 1}: ${project.title}`}
+                                aria-selected={index === currentIndex}
+                                role="tab"
                             />
                         ))}
                     </div>

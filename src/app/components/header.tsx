@@ -112,11 +112,12 @@ const Header: React.FC = () => {
                     {/* Desktop View */}
                     <div className="hidden md:flex items-center justify-between w-full py-2">
                         {/* Logo */}
-                        <motion.div
+                        <motion.button
                             onClick={handleLogoScrollToHero}
-                            className="cursor-pointer"
+                            className="cursor-pointer bg-transparent border-none"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
+                            aria-label="Scroll to top"
                         >
                             <Image
                                 src="/logo.svg"
@@ -126,7 +127,7 @@ const Header: React.FC = () => {
                                 priority
                                 className="transition-all duration-300"
                             />
-                        </motion.div>
+                        </motion.button>
 
                         {/* Navigation */}
                         <nav className="flex items-center gap-1">
@@ -170,7 +171,7 @@ const Header: React.FC = () => {
                                             transition={{ duration: 0.2 }}
                                             className="absolute right-0 mt-2 w-72 bg-[#0c1929]/95 backdrop-blur-xl rounded-xl shadow-2xl z-[60] p-4 border border-white/10"
                                         >
-                                            <h3 className="text-lg font-semibold text-white mb-3">Get in Touch</h3>
+                                            <h2 className="text-lg font-semibold text-white mb-3">Get in Touch</h2>
                                             <div className="space-y-1">
                                                 {contactItems.map((item, index) => (
                                                     <a
@@ -178,13 +179,14 @@ const Header: React.FC = () => {
                                                         href={item.href}
                                                         target={item.href.startsWith('mailto') ? undefined : '_blank'}
                                                         rel="noopener noreferrer"
+                                                        aria-label={`Contact via ${item.label}`}
                                                         className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-white/5 transition-colors group"
                                                     >
                                                         <div className="p-2 rounded-lg bg-white/5 group-hover:bg-[#06b6d4]/20 transition-colors">
                                                             <item.icon className="w-4 h-4 text-[#06b6d4]" />
                                                         </div>
                                                         <div className="flex-1 min-w-0">
-                                                            <p className="text-xs text-gray-500">{item.label}</p>
+                                                            <p className="text-xs text-gray-400">{item.label}</p>
                                                             <p className="text-sm text-white truncate">{item.value}</p>
                                                         </div>
                                                     </a>
@@ -199,10 +201,11 @@ const Header: React.FC = () => {
 
                     {/* Mobile View */}
                     <div className="flex md:hidden w-full items-center justify-between py-2">
-                        <motion.div
+                        <motion.button
                             onClick={handleLogoScrollToHero}
-                            className="cursor-pointer"
+                            className="cursor-pointer bg-transparent border-none touch-manipulation"
                             whileTap={{ scale: 0.95 }}
+                            aria-label="Scroll to top"
                         >
                             <Image
                                 src="/logo.svg"
@@ -211,7 +214,7 @@ const Header: React.FC = () => {
                                 height={40}
                                 priority
                             />
-                        </motion.div>
+                        </motion.button>
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                             className="p-2 rounded-lg hover:bg-white/10 transition-colors"
@@ -240,15 +243,17 @@ const Header: React.FC = () => {
                                     {navItems.map((item) => (
                                         <a
                                             key={item.id}
+                                            href={`#${item.id}`}
                                             onClick={(e) => handleNavClick(e, item.id)}
-                                            className="py-3 px-4 text-white text-center rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
+                                            className="py-3 px-4 text-white text-center rounded-lg hover:bg-white/5 active:bg-white/10 transition-colors cursor-pointer touch-manipulation"
                                         >
                                             {item.label}
                                         </a>
                                     ))}
                                     <button
                                         onClick={handleMobileConnectClick}
-                                        className="mt-2 py-3 px-4 bg-[#06b6d4] text-white font-semibold rounded-xl hover:bg-[#0891b2] transition-all"
+                                        className="mt-2 py-3 px-4 bg-[#06b6d4] text-white font-semibold rounded-xl hover:bg-[#0891b2] active:bg-[#0e7490] transition-all touch-manipulation"
+                                        aria-label="Open contact options"
                                     >
                                         Let&apos;s Connect
                                     </button>
@@ -277,10 +282,11 @@ const Header: React.FC = () => {
                             onClick={(e) => e.stopPropagation()}
                         >
                             <div className="flex items-center justify-between mb-4">
-                                <h3 className="text-xl font-semibold text-white">Get in Touch</h3>
+                                <h2 className="text-xl font-semibold text-white">Get in Touch</h2>
                                 <button
                                     onClick={() => setShowConnectMobileModal(false)}
                                     className="p-1 rounded-lg hover:bg-white/10 transition-colors"
+                                    aria-label="Close contact modal"
                                 >
                                     <XMarkIcon className="h-5 w-5 text-gray-400" />
                                 </button>
@@ -292,13 +298,14 @@ const Header: React.FC = () => {
                                         href={item.href}
                                         target={item.href.startsWith('mailto') ? undefined : '_blank'}
                                         rel="noopener noreferrer"
-                                        className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors"
+                                        aria-label={`Contact via ${item.label}`}
+                                        className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 active:bg-white/10 transition-colors touch-manipulation"
                                     >
                                         <div className="p-2.5 rounded-xl bg-[#06b6d4]/10">
                                             <item.icon className="w-5 h-5 text-[#06b6d4]" />
                                         </div>
                                         <div>
-                                            <p className="text-xs text-gray-500">{item.label}</p>
+                                            <p className="text-xs text-gray-400">{item.label}</p>
                                             <p className="text-sm text-white">{item.value}</p>
                                         </div>
                                     </a>

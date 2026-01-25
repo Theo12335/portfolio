@@ -53,6 +53,7 @@ const Footer: React.FC = () => {
                         onClick={scrollToTop}
                         className="p-2 rounded-lg bg-white/5 text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
                         whileTap={{ scale: 0.95 }}
+                        aria-label="Scroll to top"
                     >
                         <ChevronUpIcon className="w-4 h-4" />
                     </motion.button>
@@ -194,6 +195,7 @@ const Footer: React.FC = () => {
                         onClick={scrollToTop}
                         className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors group"
                         whileHover={{ y: -2 }}
+                        aria-label="Scroll back to top of page"
                     >
                         Back to top
                         <span className="p-1 rounded-md bg-white/5 group-hover:bg-white/10 transition-colors">

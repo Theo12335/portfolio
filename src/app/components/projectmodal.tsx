@@ -128,6 +128,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                     <button
                         onClick={onClose}
                         className="absolute top-4 right-4 z-30 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition-all duration-300"
+                        aria-label="Close project details"
                     >
                         <XMarkIcon className="w-5 h-5" />
                     </button>
@@ -168,12 +169,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                                         <button
                                             className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition-all duration-300 z-10"
                                             onClick={() => { stopGalleryAutoCycle(); goToGallerySlide(galleryCurrentIndex - 1); startGalleryAutoCycle(); }}
+                                            aria-label="Previous screenshot"
                                         >
                                             <ChevronLeftIcon className="w-5 h-5" />
                                         </button>
                                         <button
                                             className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition-all duration-300 z-10"
                                             onClick={() => { stopGalleryAutoCycle(); goToGallerySlide(galleryCurrentIndex + 1); startGalleryAutoCycle(); }}
+                                            aria-label="Next screenshot"
                                         >
                                             <ChevronRightIcon className="w-5 h-5" />
                                         </button>
@@ -186,7 +189,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
                             {/* Thumbnail Strip */}
                             {gallerySlideCount > 1 && (
-                                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10" role="tablist" aria-label="Screenshot thumbnails">
                                     {project.galleryImages.map((img, index) => (
                                         <button
                                             key={index}
@@ -196,6 +199,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                                                     ? 'border-[#06b6d4] opacity-100'
                                                     : 'border-transparent opacity-50 hover:opacity-80'
                                             }`}
+                                            aria-label={`View screenshot ${index + 1}`}
+                                            aria-selected={index === galleryCurrentIndex}
+                                            role="tab"
                                         >
                                             <Image
                                                 src={img}
@@ -235,6 +241,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                                                     href={project.githubUrl}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
+                                                    aria-label={`View ${project.title} on GitHub`}
                                                     className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all duration-300"
                                                 >
                                                     <FaGithub className="text-xl" />
@@ -245,6 +252,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                                                     href={project.websiteUrl}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
+                                                    aria-label={`Visit ${project.title} website`}
                                                     className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all duration-300"
                                                 >
                                                     <BsGlobe className="text-xl" />
@@ -330,19 +338,19 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                     <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-center">
                                         <div className="text-2xl font-bold text-[#06b6d4] mb-1">{project.tech.length}</div>
-                                        <div className="text-xs text-gray-500">Technologies</div>
+                                        <div className="text-xs text-gray-400">Technologies</div>
                                     </div>
                                     <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-center">
                                         <div className="text-2xl font-bold text-[#06b6d4] mb-1">{project.galleryImages.length}</div>
-                                        <div className="text-xs text-gray-500">Screenshots</div>
+                                        <div className="text-xs text-gray-400">Screenshots</div>
                                     </div>
                                     <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-center">
                                         <div className="text-2xl font-bold text-[#06b6d4] mb-1">{project.githubUrl ? '✓' : '—'}</div>
-                                        <div className="text-xs text-gray-500">Open Source</div>
+                                        <div className="text-xs text-gray-400">Open Source</div>
                                     </div>
                                     <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-center">
                                         <div className="text-2xl font-bold text-[#06b6d4] mb-1">{project.websiteUrl ? '✓' : '—'}</div>
-                                        <div className="text-xs text-gray-500">Live Demo</div>
+                                        <div className="text-xs text-gray-400">Live Demo</div>
                                     </div>
                                 </div>
                             </div>
@@ -360,10 +368,13 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setIsImageExpanded(false)}
+                        role="dialog"
+                        aria-label="Expanded screenshot view"
                     >
                         <button
                             onClick={() => setIsImageExpanded(false)}
                             className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all duration-300"
+                            aria-label="Close expanded view"
                         >
                             <XMarkIcon className="w-6 h-6" />
                         </button>
@@ -387,12 +398,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                                 <button
                                     className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all duration-300"
                                     onClick={(e) => { e.stopPropagation(); goToGallerySlide(galleryCurrentIndex - 1); }}
+                                    aria-label="Previous screenshot"
                                 >
                                     <ChevronLeftIcon className="w-6 h-6" />
                                 </button>
                                 <button
                                     className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all duration-300"
                                     onClick={(e) => { e.stopPropagation(); goToGallerySlide(galleryCurrentIndex + 1); }}
+                                    aria-label="Next screenshot"
                                 >
                                     <ChevronRightIcon className="w-6 h-6" />
                                 </button>

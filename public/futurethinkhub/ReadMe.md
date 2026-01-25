@@ -7,7 +7,7 @@ A comprehensive web platform for a Baltimore-based 501(c)(3) nonprofit organizat
 FutureThink Hub serves the Baltimore community with programs focused on:
 - **Food Security** - Grocery giveaways, community fridges, and holiday food drives
 - **Workforce Development** - Culinary sponsorships and job training
-- **Economic Mobility** - AI education platform (FutureThink Edge)
+- **Economic Mobility** - AI education platform (Guided Edge)
 - **Community Outreach** - Haitian community support, back-to-school drives, and more
 
 ### Impact
@@ -134,7 +134,7 @@ The development server runs at [http://localhost:3000](http://localhost:3000).
 ### Initiatives
 
 - Grocery Giveaway Saturdays
-- FutureThink Edge (AI Education)
+- Guided Edge (AI Education)
 - Haitian Community Outreach
 - Christmas Drive
 - Thanksgiving Giveaway

@@ -1,8 +1,8 @@
-# FutureThink Edge - AI-Powered Adaptive Learning Platform
+# Guided Edge - AI-Powered Adaptive Learning Platform
 
 ## Overview
 
-FutureThink Edge is a comprehensive AI-powered adaptive learning platform designed specifically for students with ADHD and other learning differences. The platform provides personalized, gamified learning experiences with superhero personas, making education engaging and accessible.
+Guided Edge is a comprehensive AI-powered adaptive learning platform designed specifically for students with ADHD and other learning differences. The platform provides personalized, gamified learning experiences with superhero personas, making education engaging and accessible.
 
 **Status:** Development (January 2026)
 **Quality Level:** Six Sigma 5.90 (CERTIFIED)
