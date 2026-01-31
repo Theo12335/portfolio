@@ -588,8 +588,7 @@ export default function Home() {
                                         floatRange={60}
                                         floatDuration={2500}
                                         transitionDuration={3000}
-                                        loading="eager"
-                                        priority
+                                        loading="lazy"
                                     />
                                 </div>
                             </ScrollReveal>
@@ -665,7 +664,7 @@ export default function Home() {
                                     width={150}
                                     height={150}
                                     className="h-auto object-contain mx-auto mb-2"
-                                    priority
+                                    loading="lazy"
                                 />
                                 <span>WordPress Certification</span>
                             </a>

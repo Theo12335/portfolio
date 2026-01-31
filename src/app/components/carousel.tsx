@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import ProjectModal from './projectmodal';
 
@@ -253,6 +253,31 @@ const Carousel: React.FC<CarouselProps> = ({ onOpenModal, onCloseModal }) => {
 
     const currentProject = projectsData[currentIndex];
 
+    // Swipe threshold for navigation (in pixels)
+    const swipeThreshold = 50;
+    const swipeVelocityThreshold = 500;
+
+    // Handle swipe/drag end
+    const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+        const { offset, velocity } = info;
+
+        // Check if swipe was significant enough (by distance or velocity)
+        const swipedLeft = offset.x < -swipeThreshold || velocity.x < -swipeVelocityThreshold;
+        const swipedRight = offset.x > swipeThreshold || velocity.x > swipeVelocityThreshold;
+
+        if (swipedLeft) {
+            // Swiped left - go to next project
+            stopAutoCycle();
+            goToSlide(currentIndex + 1, 1);
+            startAutoCycle();
+        } else if (swipedRight) {
+            // Swiped right - go to previous project
+            stopAutoCycle();
+            goToSlide(currentIndex - 1, -1);
+            startAutoCycle();
+        }
+    };
+
     const slideVariants = {
         enter: (direction: number) => ({
             x: direction > 0 ? 300 : -300,
@@ -275,7 +300,7 @@ const Carousel: React.FC<CarouselProps> = ({ onOpenModal, onCloseModal }) => {
         <>
             <div ref={containerRef} className="relative w-full max-w-6xl mx-auto pointer-events-auto">
                 {/* Main Project Card */}
-                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/[0.08] backdrop-blur-sm">
+                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/[0.08] backdrop-blur-sm touch-pan-y">
                     <AnimatePresence mode="wait" custom={direction}>
                         <motion.div
                             key={currentIndex}
@@ -285,7 +310,11 @@ const Carousel: React.FC<CarouselProps> = ({ onOpenModal, onCloseModal }) => {
                             animate="center"
                             exit="exit"
                             transition={{ duration: 0.4, ease: 'easeInOut' }}
-                            className="p-4 sm:p-6 md:p-10"
+                            className="p-4 sm:p-6 md:p-10 cursor-grab active:cursor-grabbing"
+                            drag="x"
+                            dragConstraints={{ left: 0, right: 0 }}
+                            dragElastic={0.2}
+                            onDragEnd={handleDragEnd}
                         >
                             <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 lg:gap-12">
                                 {/* Project Image/Logo */}
@@ -304,13 +333,13 @@ const Carousel: React.FC<CarouselProps> = ({ onOpenModal, onCloseModal }) => {
                                             className="object-contain p-8 transition-all duration-500 group-hover:opacity-0 group-hover:scale-110"
                                             priority
                                         />
-                                        {/* Hover Image */}
+                                        {/* Hover Image - lazy loaded since it's only visible on hover */}
                                         <Image
                                             src={currentProject.hoverImage}
                                             alt={`${currentProject.title} preview`}
                                             fill
                                             className="object-cover opacity-0 transition-all duration-500 group-hover:opacity-100"
-                                            priority
+                                            loading="lazy"
                                         />
                                         {/* Hover Overlay */}
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
@@ -403,21 +432,29 @@ const Carousel: React.FC<CarouselProps> = ({ onOpenModal, onCloseModal }) => {
 
                 {/* Dot Indicators */}
                 {slideCount > 1 && (
-                    <div className="flex justify-center gap-2 mt-6" role="tablist" aria-label="Project slides">
-                        {projectsData.map((project, index) => (
-                            <button
-                                key={index}
-                                onClick={() => { stopAutoCycle(); goToSlide(index, index > currentIndex ? 1 : -1); startAutoCycle(); }}
-                                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                                    index === currentIndex
-                                        ? 'w-8 bg-[#06b6d4]'
-                                        : 'bg-white/20 hover:bg-white/40'
-                                }`}
-                                aria-label={`Go to project ${index + 1}: ${project.title}`}
-                                aria-selected={index === currentIndex}
-                                role="tab"
-                            />
-                        ))}
+                    <div className="flex flex-col items-center gap-3 mt-6">
+                        <div className="flex justify-center gap-2" role="tablist" aria-label="Project slides">
+                            {projectsData.map((project, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => { stopAutoCycle(); goToSlide(index, index > currentIndex ? 1 : -1); startAutoCycle(); }}
+                                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                                        index === currentIndex
+                                            ? 'w-8 bg-[#06b6d4]'
+                                            : 'bg-white/20 hover:bg-white/40'
+                                    }`}
+                                    aria-label={`Go to project ${index + 1}: ${project.title}`}
+                                    aria-selected={index === currentIndex}
+                                    role="tab"
+                                />
+                            ))}
+                        </div>
+                        {/* Mobile Swipe Hint */}
+                        <div className="flex sm:hidden items-center gap-2 text-xs text-gray-400">
+                            <ChevronLeftIcon className="w-3 h-3" />
+                            <span>Swipe to browse</span>
+                            <ChevronRightIcon className="w-3 h-3" />
+                        </div>
                     </div>
                 )}
             </div>
