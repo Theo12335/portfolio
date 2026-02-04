@@ -35,8 +35,8 @@ module.exports = {
           to: { backgroundPosition: '-200% 0' },
         },
         spotlight: {
-          '0%': { opacity: 0, transform: 'translate(-72%, -62%) scale(0.5)' },
-          '100%': { opacity: 1, transform: 'translate(-50%,-40%) scale(1)' },
+          '0%': { opacity: 0, transform: 'translate3d(-72%, -62%, 0) scale3d(0.5, 0.5, 1)' },
+          '100%': { opacity: 1, transform: 'translate3d(-50%, -40%, 0) scale3d(1, 1, 1)' },
         },
         'border-beam': {
           '100%': { 'offset-distance': '100%' },
@@ -46,29 +46,29 @@ module.exports = {
           '50%': { opacity: 0.8, boxShadow: '0 0 40px rgba(0, 166, 192, 0.8)' },
         },
         float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-20px)' },
+          '0%, 100%': { transform: 'translate3d(0, 0, 0)' },
+          '50%': { transform: 'translate3d(0, -20px, 0)' },
         },
         'slide-up': {
-          '0%': { transform: 'translateY(20px)', opacity: 0 },
-          '100%': { transform: 'translateY(0)', opacity: 1 },
+          '0%': { transform: 'translate3d(0, 20px, 0)', opacity: 0 },
+          '100%': { transform: 'translate3d(0, 0, 0)', opacity: 1 },
         },
         'slide-down': {
-          '0%': { transform: 'translateY(-20px)', opacity: 0 },
-          '100%': { transform: 'translateY(0)', opacity: 1 },
+          '0%': { transform: 'translate3d(0, -20px, 0)', opacity: 0 },
+          '100%': { transform: 'translate3d(0, 0, 0)', opacity: 1 },
         },
         'scale-in': {
-          '0%': { transform: 'scale(0.9)', opacity: 0 },
-          '100%': { transform: 'scale(1)', opacity: 1 },
+          '0%': { transform: 'scale3d(0.9, 0.9, 1)', opacity: 0 },
+          '100%': { transform: 'scale3d(1, 1, 1)', opacity: 1 },
         },
         'text-gradient': {
           '0%, 100%': { backgroundPosition: '0% 50%' },
           '50%': { backgroundPosition: '100% 50%' },
         },
         meteor: {
-          '0%': { transform: 'rotate(215deg) translateX(0)', opacity: 1 },
+          '0%': { transform: 'rotate(215deg) translate3d(0, 0, 0)', opacity: 1 },
           '70%': { opacity: 1 },
-          '100%': { transform: 'rotate(215deg) translateX(-500px)', opacity: 0 },
+          '100%': { transform: 'rotate(215deg) translate3d(-500px, 0, 0)', opacity: 0 },
         },
       },
       backgroundImage: {

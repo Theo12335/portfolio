@@ -84,7 +84,7 @@ a {
   }
 }
 
-/* Hero Section Animations */
+/* Hero Section Animations - GPU Accelerated */
 @keyframes blink {
   0%, 50% { opacity: 1; }
   51%, 100% { opacity: 0; }
@@ -92,36 +92,41 @@ a {
 
 .animate-blink {
   animation: blink 1s infinite;
+  will-change: opacity;
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
+  will-change: transform, opacity;
 }
 
 .animate-fade-in-up-delay-1 {
   animation: fadeInUp 0.8s ease-out 0.2s forwards;
   opacity: 0;
+  will-change: transform, opacity;
 }
 
 .animate-fade-in-up-delay-2 {
   animation: fadeInUp 0.8s ease-out 0.4s forwards;
   opacity: 0;
+  will-change: transform, opacity;
 }
 
 .animate-fade-in-up-delay-3 {
   animation: fadeInUp 0.8s ease-out 0.6s forwards;
   opacity: 0;
+  will-change: transform, opacity;
 }
 
 /* Gradient text for modern appeal - static gradient, animates on hover */
@@ -139,49 +144,52 @@ a {
   background-position: 100% 50%;
 }
 
-/* Subtle glow effect for interactive elements */
+/* Subtle glow effect for interactive elements - GPU optimized */
 .glow-hover {
-  transition: filter 0.3s ease, transform 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  will-change: transform;
 }
 
 .glow-hover:hover {
-  filter: drop-shadow(0 0 25px var(--accent-glow));
-  transform: scale(1.02);
+  box-shadow: 0 0 25px var(--accent-glow);
+  transform: scale3d(1.02, 1.02, 1);
 }
 
-/* Primary button style */
+/* Primary button style - GPU Accelerated */
 .btn-primary {
   background: linear-gradient(135deg, var(--accent-primary) 0%, #0891b2 100%);
   color: white;
   padding: 0.75rem 2rem;
   border-radius: 9999px;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: none;
   cursor: pointer;
+  will-change: transform;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
+  transform: translate3d(0, -2px, 0);
   box-shadow: 0 10px 40px var(--accent-glow);
 }
 
-/* Secondary button style */
+/* Secondary button style - GPU Accelerated */
 .btn-secondary {
   background: transparent;
   color: var(--text-primary);
   padding: 0.75rem 2rem;
   border-radius: 9999px;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
   border: 2px solid var(--border-accent);
   cursor: pointer;
+  will-change: transform;
 }
 
 .btn-secondary:hover {
   background: rgba(6, 182, 212, 0.1);
   border-color: var(--accent-primary);
-  transform: translateY(-2px);
+  transform: translate3d(0, -2px, 0);
 }
 
 /* Glass card effect */
@@ -199,18 +207,21 @@ a {
   background: var(--surface-elevated);
 }
 
-/* Interaction hint animation - reduced motion */
+/* Interaction hint animation - reduced motion, GPU accelerated */
 @keyframes pulse-hint {
   0%, 100% {
     opacity: 0.8;
+    transform: translate3d(0, 0, 0);
   }
   50% {
     opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
 .animate-pulse-hint {
   animation: pulse-hint 3s ease-in-out infinite;
+  will-change: opacity;
 }
 
 /* Respect user's reduced motion preference */

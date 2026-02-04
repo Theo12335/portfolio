@@ -72,9 +72,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* DNS prefetch for external resources */}
+        {/* DNS prefetch and preconnect for external resources */}
         <link rel="dns-prefetch" href="https://hubspot-credentials-na1.s3.amazonaws.com" />
+        <link rel="preconnect" href="https://hubspot-credentials-na1.s3.amazonaws.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://drive.google.com" />
+        {/* Optimize rendering */}
+        <meta name="color-scheme" content="dark" />
       </head>
       <body
         suppressHydrationWarning

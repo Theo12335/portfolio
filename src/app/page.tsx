@@ -16,8 +16,11 @@ import { TextShimmer } from '@/app/components/effects';
 import { ScrollReveal, Counter } from '@/app/components/gsap-animations';
 import dynamic from 'next/dynamic';
 
-// Static import for 3D badge - critical hero element
-import DynamicID from "@/app/components/id";
+// Lazy load 3D badge - only render when visible
+const DynamicID = dynamic(() => import("@/app/components/id"), {
+    ssr: false,
+    loading: () => <div className="w-full h-full" />,
+});
 
 const FloatingAstronaut = dynamic(() => import('@/app/components/astronaut'), {
     ssr: false,
@@ -518,6 +521,7 @@ export default function Home() {
                                                             height={96}
                                                             className="w-full h-full object-contain"
                                                             loading="lazy"
+                                                            quality={75}
                                                         />
                                                     </div>
                                                     <p className="text-xs text-gray-400 group-hover:text-[#06b6d4] transition-colors">SEO Cert</p>
@@ -531,6 +535,8 @@ export default function Home() {
                                                             width={96}
                                                             height={96}
                                                             className="w-full h-full object-contain"
+                                                            loading="lazy"
+                                                            quality={75}
                                                         />
                                                     </div>
                                                     <p className="text-xs text-gray-400 group-hover:text-[#06b6d4] transition-colors">WordPress Cert</p>
@@ -648,6 +654,7 @@ export default function Home() {
                                         height={150}
                                         className="object-contain"
                                         loading="lazy"
+                                        quality={75}
                                     />
                                 </a>
                                 <p className="flex items-center justify-center text-center mt-4 text-white">SEO Certification</p>
@@ -665,6 +672,7 @@ export default function Home() {
                                     height={150}
                                     className="h-auto object-contain mx-auto mb-2"
                                     loading="lazy"
+                                    quality={75}
                                 />
                                 <span>WordPress Certification</span>
                             </a>
